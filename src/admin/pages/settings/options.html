@@ -1,0 +1,170 @@
+<div id="options_bucket">
+   <div class="Subhead">
+      <h2 class="Subhead-heading">Settings</h2>
+   </div>
+   <p>
+      When merging pull requests, you can allow any combination of
+      merge commits, squashing, or rebasing. At least one option must be enabled.
+   </p>
+   <div class="Box">
+      <!-- '"` --><!-- </textarea></xmp> -->
+      <form accept-charset="UTF-8" class="repository-merge-features js-merge-features-form" data-autosubmit="true" data-remote="true" method="post">
+         <ul>
+            <li class="Box-row py-0">
+               <div class="form-group js-repo-option">
+                  <div class="form-checkbox">
+                     <label for="merge_types_merge_commit">Allow merge commits</label>
+                     <span class="status-indicator js-status-indicator">
+                        <svg aria-hidden="true" class="octicon octicon-check" height="16" version="1.1" viewBox="0 0 12 16" width="12">
+                           <path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path>
+                        </svg>
+                     </span>
+                     <input type="checkbox" name="merge_types[]" value="merge_commit" id="merge_types_merge_commit" checked="">
+                     <p class="note">Add all commits from the head branch to the base branch with a merge commit.</p>
+                  </div>
+               </div>
+            </li>
+            <li class="Box-row py-0">
+               <div class="form-group js-repo-option">
+                  <div class="form-checkbox">
+                     <label for="merge_types_squash">Allow squash merging</label>
+                     <span class="status-indicator js-status-indicator">
+                        <svg aria-hidden="true" class="octicon octicon-check" height="16" version="1.1" viewBox="0 0 12 16" width="12">
+                           <path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path>
+                        </svg>
+                     </span>
+                     <input type="checkbox" name="merge_types[]" value="squash_merge" id="merge_types_squash" checked="">
+                     <p class="note">Combine all commits from the head branch into a single commit in the base branch.</p>
+                  </div>
+               </div>
+            </li>
+            <li class="Box-row py-0">
+               <div class="form-group js-repo-option">
+                  <div class="form-checkbox">
+                     <label for="merge_types_rebase">Allow rebase merging</label>
+                     <span class="status-indicator js-status-indicator">
+                        <svg aria-hidden="true" class="octicon octicon-check" height="16" version="1.1" viewBox="0 0 12 16" width="12">
+                           <path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path>
+                        </svg>
+                     </span>
+                     <input type="checkbox" name="merge_types[]" value="rebase_merge" id="merge_types_rebase" checked="">
+                     <p class="note">Add all commits from the head branch onto the base branch individually.</p>
+                  </div>
+               </div>
+            </li>
+         </ul>
+         <noscript>
+            <button class="btn btn-primary" type="submit">Save changes</button>
+         </noscript>
+      </form>
+   </div>
+   <div class="Subhead Subhead--spacious border-bottom-0 mb-0">
+      <h2 class="Subhead-heading">
+         Khu vực nguy hiểm
+      </h2>
+   </div>
+   <div class="Box Box--danger">
+      <ul>
+         <li class="Box-row">
+            <button type="button" class="btn btn-danger boxed-action" aria-expanded="false" ng-click="deleteDevData()">
+            Xóa
+            </button>
+            <h4>Xóa dữ liệu phát triển</h4>
+            <p>
+               Xóa dữ liệu được tạo trong quá trình phát triển (Development).
+            </p>
+         </li>
+         <li class="Box-row">
+            <button type="button" class="btn btn-danger boxed-action" data-box-overlay-id="__686b79816a75b3ce7a77526ff4fd759a" aria-expanded="false">
+            Archive this repository
+            </button>
+            <div class="Overlay js-box-overlay-container transition-in-out" id="__686b79816a75b3ce7a77526ff4fd759a" hidden="" aria-modal="true" role="dialog" aria-label="Archive repository" aria-describedby="__686b79816a75b3ce7a77526ff4fd759a-description">
+               <div class="Overlay-table-full bg-transparent-dark">
+                  <div class="Overlay-cell-middle">
+                     <div class="Box Box--overlay js-box-overlay-content">
+                        <div class="Box-header">
+                           <button type="button" class="Box-btn-octicon btn-octicon float-right js-box-overlay-close">
+                              <svg aria-label="Close" class="octicon octicon-x" height="16" role="img" version="1.1" viewBox="0 0 12 16" width="12">
+                                 <path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"></path>
+                              </svg>
+                           </button>
+                           <h3 class="Box-title">
+                              Archive repository
+                           </h3>
+                        </div>
+                        <div class="Box-body" id="__686b79816a75b3ce7a77526ff4fd759a-description">
+                           <div class="flash flash-warn flash-full ml-n3 mt-n3 mr-n3 mb-2 border-top-0">
+                              Unexpected bad things will happen if you don’t read this!
+                           </div>
+                           <p>
+                              This will make the <strong>enesyteam/meovn</strong> repository, issues,
+                              pull requests, labels, milestones, projects, wiki, releases, commits, tags, branches, reactions and
+                              comments read-only and disable any future comments. The repository can still be forked.
+                           </p>
+                           <p>Ensure you've changed any repository settings, considered closing all open issues and pull requests and updated your README before you archive this repository.</p>
+                           <p>Once archived, you can unarchive the repository at any time.</p>
+                           <p>Please type in the name of the repository to confirm.</p>
+                           <!-- '"` --><!-- </textarea></xmp> -->
+                           <form accept-charset="UTF-8" action="/enesyteam/meovn/settings/archive" class="js-normalize-submit" method="post">
+                              <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="hPdu0OWj91bKxKJHYJgWLYXkZnTGmuB7iMiEY1GI2GTQflWVet5BAGzve2a9L2iwK3ylBB0T6atm6569okThBA=="></div>
+                              <p>
+                                 <input type="text" class="form-control input-block" autofocus="" required="" pattern="[mM][eE][oO][vV][nN]|[eE][nN][eE][sS][yY][tT][eE][aA][mM]/[mM][eE][oO][vV][nN]" aria-label="Type in the name of the repository to confirm that you want to archive this repository." name="verify">
+                              </p>
+                              <button type="submit" class="btn btn-block btn-danger" data-disable-invalid="" disabled="">I understand the consequences, archive this repository</button>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <strong>Archive this repository</strong>
+            <p>Mark this repository as archived and read-only.</p>
+         </li>
+         <li class="Box-row">
+            <button type="button" class="btn btn-danger boxed-action" data-box-overlay-id="__9efa967a575401481604d4204fb717f9" aria-expanded="false">
+            Delete this repository
+            </button>
+            <div class="Overlay js-box-overlay-container transition-in-out" id="__9efa967a575401481604d4204fb717f9" hidden="" aria-modal="true" role="dialog" aria-label="Are you absolutely sure?" aria-describedby="__9efa967a575401481604d4204fb717f9-description">
+               <div class="Overlay-table-full bg-transparent-dark">
+                  <div class="Overlay-cell-middle">
+                     <div class="Box Box--overlay js-box-overlay-content">
+                        <div class="Box-header">
+                           <button type="button" class="Box-btn-octicon btn-octicon float-right js-box-overlay-close">
+                              <svg aria-label="Close" class="octicon octicon-x" height="16" role="img" version="1.1" viewBox="0 0 12 16" width="12">
+                                 <path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"></path>
+                              </svg>
+                           </button>
+                           <h3 class="Box-title">
+                              Are you absolutely sure?
+                           </h3>
+                        </div>
+                        <div class="Box-body" id="__9efa967a575401481604d4204fb717f9-description">
+                           <div class="flash flash-warn flash-full ml-n3 mt-n3 mr-n3 mb-2 border-top-0">
+                              Unexpected bad things will happen if you don’t read this!
+                           </div>
+                           <p>
+                              This action <strong>cannot</strong> be undone. This will permanently delete the <strong>enesyteam/meovn</strong>
+                              repository, wiki, issues, and comments, and remove all collaborator associations.
+                           </p>
+                           <p>Please type in the name of the repository to confirm.</p>
+                           <!-- '"` --><!-- </textarea></xmp> -->
+                           <form accept-charset="UTF-8" action="/enesyteam/meovn/settings/delete" class="js-normalize-submit" method="post">
+                              <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="delete"><input name="authenticity_token" type="hidden" value="7RVqJ97Xnzn6xJ1oUUy7e1YlYLWUTppjbsAZI81msI5yxsdkB4yX9NIId7LJHK77Zqzk7yG4C5oOEPulM7hOkQ=="></div>
+                              <p>
+                                 <input type="text" class="form-control input-block" autofocus="" required="" pattern="[mM][eE][oO][vV][nN]|[eE][nN][eE][sS][yY][tT][eE][aA][mM]/[mM][eE][oO][vV][nN]" aria-label="Type in the name of the repository to confirm that you want to delete this repository." name="verify">
+                              </p>
+                              <button type="submit" class="btn btn-block btn-danger" data-disable-invalid="" disabled="">I understand the consequences, delete this repository</button>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <strong>Delete this repository</strong>
+            <p>
+               Once you delete a repository, there is no going back. Please be certain.
+            </p>
+         </li>
+      </ul>
+   </div>
+</div>

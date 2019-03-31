@@ -1,0 +1,355 @@
+<div class="columns">
+   <div class="column one-fifth" role="navigation" data-pjax="" style="padding-left: 25px">
+      <div class="_37_s">
+         <span class=" _2iem">Đã có dữ liệu</span>
+      </div>
+      <nav class="_5z88 mb-3">
+
+         <a ui-sref="home.orders.push.all"
+            ui-sref-active="_37_r"
+            role="tab" title="Hiển thị tất cả orders" class="_37_q">Tất cả</a>
+         <a role="tab" title="{{seller.first_name + ' ' + seller.last_name}}" 
+            class="_37_q" 
+            ng-repeat="seller in (telesales_arr | reverse) track by $index"
+            ng-if="seller.report"
+            ui-sref="home.orders.push.uid({uid: seller.id})"
+            ui-sref-active="_37_r">
+            {{seller.last_name}}
+            <span class="Counter float-right" ng-if="seller.report.notCalledCount">{{seller.report.notCalledCount}}</span>
+         </a>
+      </nav>
+      <div class="_37_s">
+         <span class=" _2iem">Chưa có dữ liệu</span>
+      </div>
+      <nav class="_5z88">
+         <a role="tab" title="{{seller.first_name + ' ' + seller.last_name}}" 
+            class="_37_q" 
+            ng-repeat="seller in (telesales_arr | reverse) track by $index"
+            ng-if="!seller.report"
+            ui-sref="home.orders.push.uid({uid: seller.id})"
+            ui-sref-active="_37_r">{{seller.last_name}}</a>
+      </nav>
+   </div>
+   <div class="column four-fifths">
+      <div id="options_bucket" class="">
+         <!-- Table -->
+         <!-- New table -->
+         <div class="_4-u2  _4-u8">
+            <div class="_5dw9 _5dwa _4-u3">
+               <span itemcomponent="span" class="_38my">
+                  <span ng-if="!searchMode"> Danh sách Orders </span>
+                  <span ng-if="searchMode">
+                     Kết quả tìm kiếm orders với chuỗi "{{searchQuery.text}}"
+                  </span>
+               <span class="_2rh9">
+                  {{currentUserId ? ' của ' + filterById(telesales, currentUserId).last_name : ''}}
+               </span><span class="_3fjn"></span><span class="_c1c"></span></span>
+               <!-- <span class="_5dw8">
+                  <button class="_m71 _4jy0 _4jy3 _4jy1 _51sy selected _42ft" type="submit" value="1">
+                     <svg class="octicon gridicon gridicons-create" height="14" width="14" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g>
+                        <path d="M21 14v5c0 1.105-.895 2-2 2H5c-1.105 0-2-.895-2-2V5c0-1.105.895-2 2-2h5v2H5v14h14v-5h2z"></path>
+                        <path d="M21 7h-4V3h-2v4h-4v2h4v4h2V9h4"></path>
+                      </g>
+                   </svg>
+                     Order
+                  </button>
+               </span> -->
+               <!-- <div class="_3s3-"></div> -->
+            </div>
+            <!-- actions bar -->
+            <div class="_4-u3">
+               <div class="_4r6a">
+                  <div class="_2pi3 _2pi9">
+                     <div class="clearfix">
+                        <div class="_ohe lfloat">
+                           <div>
+                              <div class="_t7u" data-testid="search_option"><label class="_55r1 _58ak _3ct8">
+                                 <input class="_58al" type="text" placeholder="Search..." value=""
+                                  ng-model="searchQuery.text" search-enter="searchOrder()">
+                              </label>
+                              <a class=" _t7v" ng-click="searchOrder()"><i alt="" class="img sp_AJ6AiN_Sr3E_1_5x sx_d84936"></i></a><a class="hidden_elem _2rnk" ng-click="searchOrder()"><i alt="" class="img sp_PqkMkssqR4E_1_5x sx_c32c33"></i></a></div>
+                              <div class="uiPopover _6a _6b dropdown js-menu-container js-select-menu js-transitionable">
+                                 <a class="_3-99 _p _55pi _2agf _4o_4 _4jy0 _4jy3 _517h _51sy _42ft dropdown-toggle js-menu-target" aria-haspopup="true" role="button" aria-controls="js_1mg" tabindex="-1" style="max-width: 200px;">
+                                    <span class="_55pe">
+                                       <span class=" _6a pl-2">
+                                          <div class="_5kmz _qec" style="width: 20px;height: 8px">
+                                          <div class="_5kn4 _11uq">
+                                             <div class="_5abm" data-hover="tooltip" data-tooltip-content="8,595" id="js_2lt" style="width: 100%;">
+                                                <div class="_5abn" style="background-color: {{filterStatus.color}}; width: 100%;opacity: 1"></div>
+                                                <div class="_352g"></div>
+                                             </div>
+                                             <div class="_5kn5">
+                                                <div class="_5kn0">
+                                                   <div class="_5kn1"></div>
+                                                   <div class="_5kn2">8,595</div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       </span>
+                                       {{filterStatus ? filterStatus.name : 'Tất cả trạng thái'}}
+                                    </span>
+                                       <span alt="" class="_3-99 _4o_3">
+                                          <i alt="" class="img sp_VdIIRowKJa-_1_5x sx_3b4b2d"></i>
+                                       </span>
+                                 </a>
+                                 <div class="dropdown-menu-content js-menu-content" aria-expanded="false">
+                                     <div class="dropdown-menu dropdown-menu-sw right-0 mt-2" style="width: 225px;">
+                                       <div class="dropdown-header text-bold text-gray-dark pb-0">
+                                         Trạng thái Orders
+                                       </div>
+                                         <div class="dropdown-divider mb-2" role="separator"></div>
+                                         <div style="padding: 0" class=" pt-0">
+                                             <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket selected" data-tab-filter="branches" role="menu">
+                                                <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
+                                                   <a class="select-menu-item js-navigation-item js-navigation-open selected last-visible navigation-focus" data-name="master" data-skip-pjax="true" rel="nofollow"
+                                                   ng-click="resetFilterStatus()">
+                                                      <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"
+                                                      ng-if="!filterStatus">
+                                                         <path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"></path>
+                                                      </svg>
+                                                      <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text pl-2">
+                                                         Tất cả trạng thái
+                                                      </span>
+                                                   </a>
+                                                   <a class="select-menu-item js-navigation-item js-navigation-open selected last-visible navigation-focus" data-name="master" data-skip-pjax="true" rel="nofollow"
+                                                   ng-class="filterStatus==status ? 'selected' : ''"
+                                                   ng-repeat="status in statuses track by $index"
+                                                   ng-if="status.allow_fillter == 1"
+                                                   ng-click="toggleFilterStatus(status)">
+                                                      <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"
+                                                      ng-if="filterStatus.id == status.id">
+                                                         <path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"></path>
+                                                      </svg>
+                                                      <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text pl-2">
+                                                      {{status.name}}
+                                                      </span>
+                                                   </a>
+                                                </div>
+                                             </div>
+                                         </div>
+                                         
+                                     </div>
+                                   </div>
+                              </div>
+                              
+                              <!-- <span class=" _6a pl-0" >{{filterStatus.name}}</span> -->
+
+                           </div>
+                        </div>
+                        <div class="_ohf rfloat">
+                           <div class="_53wl">
+                              <div class="uiPopover _6a _6b dropdown js-menu-container js-select-menu js-transitionable">
+                                 <a class="_3-99 _p _55pi _2agf _4o_4 _4jy0 _4jy3 _517h _51sy _42ft dropdown-toggle js-menu-target" aria-haspopup="true" role="button" aria-controls="js_1mg" tabindex="-1" style="max-width: 200px;">
+                                    <span class="_55pe">
+                                       <span class=" _6a pl-2" ng-if="getSelectedSellers().length > 0">
+                                          <span 
+                                         ng-repeat="seller in (telesales_arr | reverse) track by $index"
+                                         ng-if="seller.selected">
+                                         <span style="padding-top: 2px">
+                                            <svg class="octicon gridicon gridicons-user-circle" height="16" width="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18.5c-4.694 0-8.5-3.806-8.5-8.5S7.306 3.5 12 3.5s8.5 3.806 8.5 8.5-3.806 8.5-8.5 8.5zm0-8c-3.038 0-5.5 1.728-5.5 3.5s2.462 3.5 5.5 3.5 5.5-1.728 5.5-3.5-2.462-3.5-5.5-3.5zm0-.5c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z"></path></g></svg>
+                                         </span>
+                                            <span style="margin-left: -2px !important;">
+                                               {{seller.last_name }}
+                                            </span>
+                                            
+                                         </span>
+                                       </span>
+                                       <span ng-if="getSelectedSellers().length == 0">
+                                          Chưa chọn telesales
+                                       </span>
+                                       
+                                    </span>
+                                       <span alt="" class="_3-99 _4o_3">
+                                          <i alt="" class="img sp_VdIIRowKJa-_1_5x sx_3b4b2d"></i>
+                                       </span>
+                                 </a>
+                                 <div class="dropdown-menu-content js-menu-content" aria-expanded="false">
+                                     <div class="dropdown-menu dropdown-menu-sw right-0 mt-2" style="width: 225px;">
+                                       <div class="dropdown-header text-bold text-gray-dark pb-0">
+                                         Chọn telesales
+                                         
+                                       </div>
+                                         <div class="dropdown-divider mb-2" role="separator"></div>
+                                         <div style="padding: 0" class=" pt-0">
+                                             <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket selected" data-tab-filter="branches" role="menu">
+                                                <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
+                                                   <!-- <a class="select-menu-item js-navigation-item js-navigation-open selected last-visible navigation-focus" data-name="master" data-skip-pjax="true" rel="nofollow"
+                                                   ng-click="resetFilterStatus()">
+                                                      <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"
+                                                      ng-if="!filterStatus">
+                                                         <path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"></path>
+                                                      </svg>
+                                                      <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text pl-2">
+                                                         Bỏ chọn tất cả
+                                                      </span>
+                                                   </a> -->
+                                                   <a class="select-menu-item js-navigation-item js-navigation-open selected last-visible navigation-focus" data-name="master" data-skip-pjax="true" rel="nofollow"
+                                                   ng-repeat="seller in (telesales_arr | reverse) track by $index"
+                                                   ng-click="checkedUser(seller)"
+                                                   aria-label="{{seller.report.notCalledCount || 0}} số chưa gọi">
+                                                      <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"
+                                                      ng-if="seller.selected">
+                                                         <path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"></path>
+                                                      </svg>
+                                                      <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text pl-2">
+                                                      {{seller.last_name}}
+                                                      <span class="_1rus">
+                                                         / {{seller.first_name}}
+                                                     </span>
+                                                      <span class="Counter float-right" ng-if="seller.report.notCalledCount">{{seller.report.notCalledCount}}</span>
+                                                      </span>
+                                                   </a>
+                                                </div>
+                                             </div>
+                                         </div>
+                                         
+                                     </div>
+                                   </div>
+                              </div>
+                              <!-- <div class="_3-9a _51xa  _6a"><button class="_4jy0 _4jy3 _517h _51sy _42ft ml-1" ng-click="releaseSelectedUsers()" type="submit" value="1"><i alt="" class="img sp_C5ZIe9IlKoO_1_5x sx_92fef1"></i><span class="accessible_elem">Hủy số</span></button><button class="_4jy0 _4jy3 _517h _51sy _42ft ml-1" type="submit" value="1" ng-click="testPush()"><i alt="" class="img sp_v9KMcXDNWLt_1_5x sx_ab8b10"></i><span class="accessible_elem">Phân số</span></button></div> -->
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- /actions bar -->
+            <!-- Table -->
+            <div class="_3or5">
+               <span class="_52tg hidden_elem img _55ym _55yq _55yo" role="progressbar" aria-valuetext="Loading..." aria-busy="true" aria-valuemin="0" aria-valuemax="100"></span>
+               <div class="_1v6t _4-u3">
+                  <div class="_3h1i _1mie" style="width: 100%;">
+                     <div class="_3h1j" style="width: 100%">
+                        <div class="_3487 _3488 _3489" style="width: 0px; left: 0px;">
+                           <div class="_348a" style=""></div>
+                        </div>
+                        <div class="_1mmd _1mme" style="z-index: 1; width: 778px; height: 28px;">
+                           <div class="_182x" style="height: 28px; width: 0px; z-index: 2; left: 0px;">
+                              <div class="_63jp" style="height: 28px; width: 0px; transform: translate3d(0px, 0px, 0px); backface-visibility: hidden;"></div>
+                           </div>
+                           <div class="_182x" style="height: 28px; width: 778px; z-index: 0; left: 0px;">
+                              <div class="_63jp" style="height: 28px; width: 778px; transform: translate3d(0px, 0px, 0px); backface-visibility: hidden;">
+                                 <div class="_1eyh _1eyi" style="height: 28px; width: 36px; left: 0px;">
+                                    <div class="_1eyb _3h1a _1mib _e-x" style="width: 36px; height: 28px; top: 0px;">
+                                       <div class="_3pzk" style="height: 28px; left: 0px;">
+                                          <div class="_3pzj" style="height: 28px; position: relative; width: 36px; z-index: 0; transform: translate3d(0px, 0px, 0px); backface-visibility: hidden;">
+                                             <div class="_4lg0 _4h2m" style="height: 28px; width: 36px; left: 0px;">
+                                                <div width="36" datakey="select" class="_4lgc _4h2u _5yj5" columndata="[object Object]" columnkey="select" height="28" rowindex="0" style="height: 28px; width: 36px;">
+                                                   <div class="_4lgd _4h2w">
+                                                      <div class="_4lge _4h2x">
+                                                         <div class="_2pi9 _4h2r"><button aria-checked="false" aria-disabled="false" class="_1gcq _29c- _1gco _5e9w" role="checkbox" style="border-color: rgb(218, 221, 225); background-color: rgb(255, 255, 255);"><i aria-hidden="true" class="_3w08 accessible_elem img sp_H9pzGrhptNk_1_5x sx_76991b" alt="" style="left: 0px; top: 0px;"></i></button></div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="_1eyh _1eyi" style="height: 28px; width: 372px; left: 36px;">
+                                    <div class="_1eyb _3h1a _1mib _e-x" style="width: 372px; height: 28px; top: 0px;">
+                                       <div class="_3pzk" style="height: 28px; left: 0px;">
+                                          <div class="_3pzj" style="height: 28px; position: relative; width: 372px; z-index: 0; transform: translate3d(0px, 0px, 0px); backface-visibility: hidden;">
+                                             <div class="_4lg0 _4h2m" style="height: 28px; width: 372px; left: 0px;">
+                                                <div label="Posts" width="372" datakey="POST" class="_4lgc _4h2u" columndata="[object Object]" columnkey="POST" height="28" rowindex="0" style="height: 28px; width: 372px;">
+                                                   <div class="_4lgd _4h2w">
+                                                      <div class="_4lge _4h2x">
+                                                         <div class="_2k57 _4h2r" style="width: 372px;">Orders</div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="_1eyh _1eyi" style="height: 28px; width: 80px; left: 408px;">
+                                    <div class="_1eyb _3h1a _1mib _e-x" style="width: 80px; height: 28px; top: 0px;">
+                                       <div class="_3pzk" style="height: 28px; left: 0px;">
+                                          <div class="_3pzj" style="height: 28px; position: relative; width: 80px; z-index: 0; transform: translate3d(0px, 0px, 0px); backface-visibility: hidden;">
+                                             <div class="_4lg0 _4h2m" style="height: 28px; width: 80px; left: 0px;">
+                                                <div label="Reach" width="80" datakey="REACH" class="_4lgc _4h2u" columndata="[object Object]" columnkey="REACH" height="28" rowindex="0" style="height: 28px; width: 80px;">
+                                                   <div class="_4lgd _4h2w">
+                                                      <div class="_4lge _4h2x">
+                                                         <div class="_2k57 _4h2r" style="width: 80px;">Status</div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="_1eyh _1eyi" style="height: 28px; width: 140px; left: 488px;">
+                                    <div class="_1eyb _3h1a _1mib _e-x" style="width: 140px; height: 28px; top: 0px;">
+                                       <div class="_3pzk" style="height: 28px; left: 0px;">
+                                          <div class="_3pzj" style="height: 28px; position: relative; width: 140px; z-index: 0; transform: translate3d(0px, 0px, 0px); backface-visibility: hidden;">
+                                             <div class="_4lg0 _4h2m" style="height: 28px; width: 140px; left: 0px;">
+                                                <div label="Clicks/Actions" width="140" datakey="ENGAGEMENT" class="_4lgc _4h2u" columndata="[object Object]" columnkey="ENGAGEMENT" height="28" rowindex="0" style="height: 28px; width: 140px;">
+                                                   <div class="_4lgd _4h2w">
+                                                      <div class="_4lge _4h2x">
+                                                         <div data-hover="tooltip" data-tooltip-content="Clicks/Actions" class="_1i32 _4h2r" id="js_1nd">
+                                                            <div class="_4ik4 _4ik5" style="line-height: 16px; height: 16px; -webkit-line-clamp: 1;">
+                                                               <div> Telesale </div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="_1eyh _1eyi" style="height: 28px; width: 150px; left: 628px;">
+                                    <div class="_1eyb _3h1a _1mib _e-x" style="width: 150px; height: 28px; top: 0px;">
+                                       <div class="_3pzk" style="height: 28px; left: 0px;">
+                                          <div class="_3pzj" style="height: 28px; position: relative; width: 150px; z-index: 0; transform: translate3d(0px, 0px, 0px); backface-visibility: hidden;">
+                                             <div class="_4lg0 _4h2m" style="height: 28px; width: 150px; left: 0px;">
+                                                <div label="Published" width="163" datakey="PUBLISHED_DATE" class="_4lgc _4h2u" columndata="[object Object]" columnkey="PUBLISHED_DATE" height="28" rowindex="0" style="height: 28px; width: 150px;">
+                                                   <div class="_4lgd _4h2w">
+                                                      <div class="_4lge _4h2x">
+                                                         <div class="_54_8 _54_9 _5y6x _3i6j _4h2r _2wzx" role="columnheader" tabindex="-1">
+                                                            <div class="_2eq6"><span>Time</span></div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div ui-view></div>
+                     </div>
+                  </div>
+                  <div></div>
+               </div>
+            </div>
+            <!-- /Table -->
+         </div>
+         <!-- /new table -->
+         <div class="__qm">
+            <span ng-show="isLoaddingOrder" style="position: fixed;top: 0;left: 0;right: 0;background: red">Đang tải...</span>
+            <a data-testid="add_tab_open_button" class="_4jy0 _4jy5 _517h _51sy _42ft" ng-click="loadMoreOrders()" rel="dialog">
+               <span ng-if="isLoaddingOrder" style="border:none">
+                  <span class="_52tg img _55ym _55yq _55yo" role="progressbar" aria-valuetext="Loading..." aria-busy="true" aria-valuemin="0" aria-valuemax="100"></span>
+                  Đang tải Orders...
+               </span>
+               <span ng-if="!isLoaddingOrder" style="border:none">
+                  Tải thêm Orders
+               </span>
+               <span ng-if="canLoadMore==false" style="border:none">
+                  Đã tải tất cả Orders
+               </span>
+            </a>
+         </div>
+         <!-- /Table -->
+      </div>
+   </div>
+</div>
+<div ng-include="'/src/admin/widgets/right-column.html'"></div>

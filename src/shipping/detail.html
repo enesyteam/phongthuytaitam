@@ -1,0 +1,119 @@
+<div class="row_col_right">
+  <div class="create-shipping" ng-if="activedItem.is_cancel">
+      <div class="write-area"  style="height: {{windowsHeight-(55+75)}}px;">
+        <div class="blankslate" style="height: 100%">
+          <h3>Order này đã hủy trên hệ thống.</h3>
+          <p>Bạn không thể tạo đơn từ 1 Order đã hủy trên hệ thống. Vui lòng liên hệ Quản trị.</p>
+        </div>
+      </div>
+  </div>
+   <div ng-include="'/src/shipping/widgets/create-shipping.html'" ng-if="!activedItem.orderCode && !activedItem.is_cancel"></div>
+   <div class="edit-shipping" ng-if="activedItem.orderCode">
+     <div class="info">
+       <h3>
+       Order này đã tạo đơn hàng thành công trên GHN với mã vận đơn: {{activedItem.orderCode}}
+       </h3>
+       <span>Trạng thái đơn hàng: <strong> {{getStatusByCode(trackingData.data.data.CurrentStatus).text}} </strong></span>
+       <hr />
+       <!-- <a href="/printing#/PrintInvoice/id={{activedItem.id}}" target="_blank" class="btn btn-purple">In phiếu xuất kho</a> -->
+       <div class="flash flash-error">
+        <!-- react-text: 5 -->Bạn có thể in phiếu xuất kho ngay tại đây.<!-- /react-text -->
+        <a href="/printing#/PrintInvoice/id={{activedItem.id}}" target="_blank" class="btn btn-purple flash-action">In phiếu xuất kho</a>
+      </div>
+       <ul class="actions-list">
+         <!-- <li ng-if="trackingData.data.data.CurrentStatus=='ReadyToPick'">
+           Bạn có thể Chỉnh sửa đơn hàng này <a href="#">tại đây</a>.
+         </li> -->
+         <li ng-if="trackingData.data.data.CurrentStatus=='ReadyToPick'">
+           Bạn có thể Hủy đơn hàng này <a ng-click="cancelOrder(activedItem.orderCode)">tại đây</a>.
+         </li>
+         <li ng-if="trackingData.data.data.CurrentStatus!=='ReadyToPick'">
+           Bạn không thể chỉnh sửa hoặc hủy đơn hàng này vì GHN không cho phép.
+         </li>
+         <li>
+           <span ng-if="activedItem.is_cancel !== true">Bấm <a ng-click="cancelCurrentShippingItem()">vào đây để hủy đơn này trên hệ thống Meovn.</a></span>
+           <span ng-if="activedItem.is_cancel == true">Đơn hàng này đã hủy trên hệ thống</span>
+         </li>
+       </ul>
+       <hr class="pt-3" />
+       <h3>Thông tin đơn hàng</h3>
+       <div>
+         <ul class="tracking-report">
+               <li>
+                  <div class="report-text">
+                     <h5 class="m-2">Tên người gửi: </h5>
+                  </div>
+                  <div class="report-value">
+                     <h5 class="m-2">{{trackingData.data.data.SenderName}}</h5>
+                  </div>
+               </li>
+               <li>
+                  <div class="report-text">
+                     <h5 class="m-2">Số điện thoại người gửi: </h5>
+                  </div>
+                  <div class="report-value">
+                     <h5 class="m-2">{{trackingData.data.data.SenderPhone}}</h5>
+                  </div>
+               </li>
+               <li>
+                  <div class="report-text">
+                     <h5 class="m-2">Địa chỉ người gửi: </h5>
+                  </div>
+                  <div class="report-value">
+                     <h5 class="m-2">{{trackingData.data.data.PickAddress}}</h5>
+                  </div>
+               </li>
+               <li>
+                  <div class="report-text">
+                     <h5 class="m-2">Họ tên người nhận: </h5>
+                  </div>
+                  <div class="report-value">
+                     <h5 class="m-2">{{trackingData.data.data.CustomerName}}</h5>
+                  </div>
+               </li>
+               <li>
+                  <div class="report-text">
+                     <h5 class="m-2">Số điện thoại người nhận: </h5>
+                  </div>
+                  <div class="report-value">
+                     <h5 class="m-2">{{trackingData.data.data.CustomerPhone}}</h5>
+                  </div>
+               </li>
+               <li>
+                  <div class="report-text">
+                     <h5 class="m-2">Địa chỉ người nhận: </h5>
+                  </div>
+                  <div class="report-value">
+                     <h5 class="m-2">{{trackingData.data.data.ShippingAddress}}</h5>
+                  </div>
+               </li>
+               <li>
+                  <div class="report-text">
+                     <h5 class="m-2">Tổng số tiền thanh toán (COD): </h5>
+                  </div>
+                  <div class="report-value">
+                     <h5 class="m-2">{{trackingData.data.data.CoDAmount | number}}</h5>
+                  </div>
+               </li>
+               <li>
+                  <div class="report-text">
+                     <h5 class="m-2">Ngày dự kiến giao hàng: </h5>
+                  </div>
+                  <div class="report-value">
+                     <h5 class="m-2">{{trackingData.data.data.ExpectedDeliveryTime | date: 'dd/MM/yyyy HH:mm'}}</h5>
+                  </div>
+               </li>
+            </ul>
+       </div>
+<!--        <pre>
+         {{trackingData | json}}
+       </pre> -->
+     </div>
+   </div>
+      <div class="conversation-log" style="overflow-y: scroll;overflow-x: hidden;">
+        <div ng-include="'/src/admin/widgets/chat-box.html'"></div>
+        <!-- <pre>
+          {{shippingData | json}}
+        </pre> -->
+   </div>
+</div>

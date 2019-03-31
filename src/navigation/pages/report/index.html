@@ -1,0 +1,46 @@
+ <h3 ng-if="!currentMember">
+      Vui lòng đăng nhập để tải dữ liệu đơn hàng!
+    </h3>
+<div class="d-flex flex-justify-between border-bottom pb-3 ng-scope" style="" ng-if="currentMember">
+    <h3>
+      {{result.length > 0 ? result.length : 'Không tìm thấy '}} đơn hàng {{result.length>0 ? 'đã chốt ' : 'nào của '}} ngày {{selectedDate}}
+    </h3>
+    <div class="select-menu branch-select-menu js-menu-container js-select-menu float-right">
+            <datepicker date-format="yyyy-MM-dd" selector="form-control">
+               <div class="input-group">
+                  <input class="form-control input-sm" placeholder="Chọn ngày hiển thị" ng-model="selectedDate"/>
+                  <span class="input-group-addon" style="cursor: pointer">
+                  <i class="fa fa-lg fa-calendar"></i>
+                  </span>
+               </div>
+            </datepicker>
+         </div>
+         <a class="btn btn-sm new-pull-request-btn" data-pjax="" ng-click="getReportForSelectedDate(selectedDate)">
+         Cập nhật
+         </a>
+         <a class="btn btn-sm btn-primary new-pull-request-btn" data-pjax="" ng-csv="getCSV" charset="utf-8,\uFEFF" filename="export_don_hang_{{getCSVFileName()}}.csv" csv-header="['Tên KH', 'ĐT', 'Ngày tạo', 'Địa chỉ', 'Năm sinh', 'Giá trị đơn đã chốt', 'COD đối soát', 'Mã VĐ', 'Bưu cục', 'Cước Phí gửi hàng', 'Người chốt', 'Trạng thái hiện tại', 'Sản phẩm 1', 'SL', 'Sản phẩm 2', 'SL', 'Sản phẩm 3', 'SL', 'Page ID', 'Tên Page', 'Trực page', 'Combo', 'Xa hang']">
+         Xuất dữ liệu
+         </a>
+</div>
+
+<div ng-if="isGettingData" class="mt-8" style="margin-top:50px">
+	<div class="ytp-spinner" data-layer="4" style="">
+        <div>
+        <div class="ytp-spinner-container">
+        <div class="ytp-spinner-rotator">
+        <div class="ytp-spinner-left">
+        <div class="ytp-spinner-circle"></div>
+        </div>
+        <div class="ytp-spinner-right">
+        <div class="ytp-spinner-circle"></div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div class="ytp-spinner-message" style="display: block;">
+        	Đang tải dữ liệu, vui lòng chờ trong giây lát... 
+        </div>
+        </div>
+</div>
+
+<div ng-if="!isGettingData" ng-include="'/src/navigation/pages/report/widgets/list.html'"></div>

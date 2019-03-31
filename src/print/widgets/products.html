@@ -1,0 +1,81 @@
+<div id="js-contribution-activity" class="activity-listing contribution-activity" data-pjax-container="" style="min-height: 166px;">
+   <div class="js-project-activity-pane Details">
+      <div ng-if="activedItem.is_cancel == true" class="flash flash-error"><strong>Chú ý: </strong>Đơn hàng này đã hủy trên hệ thống</div>
+      <h3 class="mt-2">Chi tiết đơn hàng</h3>
+      <div class="customer-infomation pt-2 mt-3">
+         <h2 class="mt-0 mb-1">Thông tin người nhận</h2>
+         <table class="width-full">
+               <tr>
+                  <td class="field">Họ tên</td>
+                  <td class="value">{{activedItem.data.customerData.realName}}</td>
+               </tr>
+               <tr>
+                  <td class="field">Số ĐT</td>
+                  <td class="value">{{activedItem.data.customerData.recievedPhone}}</td>
+               </tr>
+               <tr>
+                  <td class="field">Năm sinh</td>
+                  <td class="value">{{activedItem.data.customerData.birthDay}}</td>
+               </tr>
+               <tr>
+                  <td class="field">Địa chỉ</td>
+                  <td class="value">{{activedItem.data.customerData.addresss}}</td>
+               </tr>
+               <tr>
+                  <td class="field">Link facebook</td>
+                  <td class="value"><a href="//facebook.com/{{activedItem.data.orderData.customer_id}}" target="_blank">{{activedItem.data.orderData.customer_name}}</a></td>
+               </tr>
+         </table>
+      </div>
+      <div class="pack-info pt-2 mt-3">
+         <h2 class="mt-0 mb-1">Nội dung đơn hàng</h2>
+         <div class="packs-info">
+            <div class="product" ng-repeat="product in activedItem.data.customerData.products track by $index">
+               <strong>Sản phẩm {{activedItem.data.customerData.products.length > 1 ? $index+1 : ''}}</strong>
+               <table class="width-full">
+                     <tr>
+                        <td>Tên sản phẩm</td>
+                        <td>{{findProduct(product.id).name}}</td>
+                     </tr>
+                     <tr>
+                        <td>Số lượng</td>
+                        <td>{{product.count}}</td>
+                     </tr>
+                     <tr>
+                        <td>Ghi chú sản phẩm này</td>
+                        <td>{{product.note}}</td>
+                     </tr>
+               </table>
+            </div>
+         </div>
+      </div>
+      <div class="pack-info pt-2 mt-3">
+         <h2 class="mt-0 mb-1">Ghi chú đóng hàng</h2>
+         <p class="pl-3">
+            {{activedItem.data.customerData.customerNote || 'Không có ghi chú'}}
+         </p>
+      </div>
+      <div class="pack-info pt-2 mt-3">
+         <h2 class="mt-0 mb-1">Ghi chú giao hàng</h2>
+         <p class="pl-3">
+            {{activedItem.data.customerData.orderNote || 'Không có ghi chú'}}
+         </p>
+      </div>
+      <div class="pack-info pt-2 mt-3">
+         <h2 class="mt-0 mb-1">Giá trị đơn hàng</h2>
+         <div class="packs-info">
+            <div class="product">
+               <table class="width-full">
+                     <tr>
+                        <td>Tổng số tiền</td>
+                        <td style="font-size: 18px;font-weight: 700">{{activedItem.data.customerData.cod | number}} Đ</td>
+                     </tr>
+               </table>
+            </div>
+         </div>
+      </div>
+      <!-- <pre>
+         {{activedItem | json}}
+      </pre> -->
+   </div>
+</div>

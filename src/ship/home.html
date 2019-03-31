@@ -1,0 +1,490 @@
+<div class="app"   id="xxx">
+		
+		<aside class="app-aside" infinite-scroll='loadMoreOrders()' infinite-scroll-disabled="isLoaddingOrder"
+        infinite-scroll-distance="1" infinite-scroll-parent ='#xxx'>
+      <div class="filter-bar">
+        <div class="nav__tabs__top">
+            <div id="message-tab" class="clickable main-tab-btn main-tab-btn__icon-message flx flx-col flx-al-c
+            {{ display_mode == 'user' ? 'selected' : '' }}" data-translate-title="STR_TAB_MESSAGE" title="Hiển thị theo Telesale" style="position: relative;"
+            ng-click=getByUser()>
+              <svg class="gridicon gridicons-user" fill="currentColor" height="32" width="32" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M12 4c2.21 0 4 1.79 4 4s-1.79 4-4 4-4-1.79-4-4 1.79-4 4-4zm0 16s8 0 8-2c0-2.4-3.9-5-8-5s-8 2.6-8 5c0 2 8 2 8 2z"></path></g></svg>
+            </div>
+            <div id="message-tab" class="clickable main-tab-btn main-tab-btn__icon-message flx flx-col flx-al-c 
+            {{ display_mode == 'page' ? 'selected' : '' }}" data-translate-title="STR_TAB_MESSAGE" title="Hiển thị theo Page" style="position: relative;"
+            ng-click=getByPage()>
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 50 50"  fill="currentColor" class="gridicon gridicons-user" style="margin-left: 15px">    <path d="M40,0H10C4.486,0,0,4.486,0,10v30c0,5.514,4.486,10,10,10h30c5.514,0,10-4.486,10-10V10C50,4.486,45.514,0,40,0z M39,17h-3 c-2.145,0-3,0.504-3,2v3h6l-1,6h-5v20h-7V28h-3v-6h3v-3c0-4.677,1.581-8,7-8c2.902,0,6,1,6,1V17z"></path></svg>
+            </div>
+            <div id="message-tab" class="clickable main-tab-btn main-tab-btn__icon-message flx flx-col flx-al-c 
+            " data-translate-title="STR_TAB_MESSAGE" title="In phiếu xuất kho" style="position: relative;"
+            ng-click=print()>
+              <svg viewBox="0 0 24 24" class="gridicon gridicons-print" fill="currentColor"  style="margin-left: 15px" width="24" height="24"><g><path d="M9 16h6v2H9v-2zm13 1h-3v3c0 1.105-.895 2-2 2H7c-1.105 0-2-.895-2-2v-3H2V9c0-1.105.895-2 2-2h1V5c0-1.105.895-2 2-2h10c1.105 0 2 .895 2 2v2h1c1.105 0 2 .895 2 2v8zM7 7h10V5H7v2zm10 7H7v6h10v-6zm3-3.5c0-.828-.672-1.5-1.5-1.5s-1.5.672-1.5 1.5.672 1.5 1.5 1.5 1.5-.672 1.5-1.5z"></path></g></svg>
+            </div>
+          <!-- <div class="user-nav">
+            <div class="avatar avatar--xs clickable"><div class="avatar-img " style="background-image: url(&quot;//s120.avatar.talk.zdn.vn/3/6/5/8/6/120/875f0e87c0daaf99d2c2d26030f82242.jpg&quot;);"></div></div>
+          </div>
+          <div class="nav__tabs__top">
+            <div id="message-tab" class="clickable main-tab-btn main-tab-btn__icon-message flx flx-col flx-al-c  selected" data-translate-title="STR_TAB_MESSAGE" title="Tin nhắn (Alt+1)" style="position: relative;"><i class="fa #main-tab   fa-tab-message-selected" style="font-size: 23px;"></i><img class="tab-red-dot" src="https://zalo-chat-static.zadn.vn/message_notification_3.png" style="top: 12px; right: 11px; position: absolute;"></div>
+            
+
+          </div> -->
+        </div>
+   <!-- .aside-content -->
+   <div class="aside-content">
+      <!-- .aside-header -->
+      <header class="aside-header d-block ">
+         <div class="top-bar-search aside-search">
+            <div class="input-group has-clearable input-group-search {{isSearchBoxSelect ? 'focus' : ''}}">
+              <button type="button" class="close show" aria-label="Close">
+                <span aria-hidden="true">
+                  <i class="fa fa-times-circle"></i>
+                </span>
+              </button>
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <span class="oi oi-magnifying-glass"></span>
+                </span>
+              </div>
+              <input type="text" class="form-control" aria-label="Search" placeholder="Search..."
+              ng-model="searchQuery.text" search-enter="searchOrder()" ng-focus="focusSearch()" ng-blur="blurSearch()"> </div>
+          </div>
+          <!-- <div class="page-loader">
+            <div class="ytp-spinner" data-layer="4" style="width:30px;height: 30px;display: block;z-index: 99999;top: 50%;padding: 15px" ng-if="!todaySuccess">
+               <div>
+                  <div class="ytp-spinner-container">
+                     <div class="ytp-spinner-rotator">
+                        <div class="ytp-spinner-left">
+                           <div class="ytp-spinner-circle"></div>
+                        </div>
+                        <div class="ytp-spinner-right">
+                           <div class="ytp-spinner-circle"></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="ytp-spinner-message" style="display: inline-block;">
+                    Loading data from server, please wait...
+                </div>
+            </div>
+        </div> -->
+          <div style="padding: 15px;text-align: center;">
+            <span ng-if="todaySuccess">
+              <strong>{{todaySuccess}}</strong> Đơn hàng đã chốt hôm nay
+            </span>
+           <!--  <span moment-picker="currentDate"
+            format="L"
+            min-view="month"
+            format="DD-MM-YYYY"
+            is-open="onSelectDateOpen"
+            change="onCurrentDateChange(newValue, oldValue)">
+                {{ currentDate || 'Click here to select a date' }}
+            </span> -->
+            <span ng-if="!todaySuccess" style="color:red">
+              Đang tải dữ liệu tổng số đơn hàng...
+            </span>
+          </div>
+          <div ng-if="display_id">
+            <div style="padding: 15px;    background: red;color: #fff;cursor: pointer;" ng-click="get()">
+              <span>Bạn đang ở chế độ hiển thị theo {{display_mode}}. Click vào đây để trở về chế độ hiển thị tất cả.</span>
+            </div>
+            <div style="padding: 15px;">
+              Hiển thị<strong> {{availableShippingItems.length}} </strong>đơn hàng của 
+              <strong>
+                {{ display_mode == 'page' ? filterById(fanpages, display_id).name : (display_mode == 'user' ? filterById(telesales, display_id).last_name : '')}}
+              </strong>. 
+              <a class="btn btn-sm btn-primary btn-link" data-pjax="" ng-csv="getCSV" charset="utf-8,\uFEFF" filename="export_don_hang_{{ display_mode == 'page' ? filterById(fanpages, display_id).name : (display_mode == 'user' ? filterById(telesales, display_id).last_name : '')}}.csv" csv-header="['Tên KH', 'ĐT', 'Ngày tạo', 'Địa chỉ', 'Năm sinh', 'Mã VĐ', 'COD', 'Phí gửi hàng', 'Người chốt', 'Trạng thái hiện tại', 'Sản phẩm 1', 'SL', 'Sản phẩm 2', 'SL', 'Sản phẩm 3', 'SL', 'Page ID', 'Tên Page', 'Ghi chú giao hàng']">
+               Xuất dữ liệu
+               </a>
+            </div>
+          </div>
+      </header>
+      <!-- /.aside-header -->
+      <!-- .aside-menu -->
+      <section class="aside-menu ps ps--active-y shipping-list">
+        <div  ng-if="is_getting_orders" style="text-align: center;padding-top: 15px">
+            Đang tải dữ liệu đơn hàng...
+        </div>
+         <!-- .stacked-menu -->
+         <nav id="stacked-menu" class="stacked-menu shippings-list stacked-menu-has-collapsible" ng-if="!is_getting_orders">
+          
+            <!-- .shipping items -->
+            <div class="shipping-item" ng-repeat="order in availableShippingItems track by $index"
+            ng-if="order.data.id"
+            ng-click="onClickOrder(order)">
+            	<div class="item-container {{order.selected == true ? 'selected' : ''}}">
+            		<div class="item-avatar">
+            			<div class="avatar">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 212 212" width="42" height="42"><path fill="#DFE5E7" d="M106.251.5C164.653.5 212 47.846 212 106.25S164.653 212 106.25 212C47.846 212 .5 164.654.5 106.25S47.846.5 106.251.5z"></path><g fill="#FFF"><path d="M173.561 171.615a62.767 62.767 0 0 0-2.065-2.955 67.7 67.7 0 0 0-2.608-3.299 70.112 70.112 0 0 0-3.184-3.527 71.097 71.097 0 0 0-5.924-5.47 72.458 72.458 0 0 0-10.204-7.026 75.2 75.2 0 0 0-5.98-3.055c-.062-.028-.118-.059-.18-.087-9.792-4.44-22.106-7.529-37.416-7.529s-27.624 3.089-37.416 7.529c-.338.153-.653.318-.985.474a75.37 75.37 0 0 0-6.229 3.298 72.589 72.589 0 0 0-9.15 6.395 71.243 71.243 0 0 0-5.924 5.47 70.064 70.064 0 0 0-3.184 3.527 67.142 67.142 0 0 0-2.609 3.299 63.292 63.292 0 0 0-2.065 2.955 56.33 56.33 0 0 0-1.447 2.324c-.033.056-.073.119-.104.174a47.92 47.92 0 0 0-1.07 1.926c-.559 1.068-.818 1.678-.818 1.678v.398c18.285 17.927 43.322 28.985 70.945 28.985 27.678 0 52.761-11.103 71.055-29.095v-.289s-.619-1.45-1.992-3.778a58.346 58.346 0 0 0-1.446-2.322zM106.002 125.5c2.645 0 5.212-.253 7.68-.737a38.272 38.272 0 0 0 3.624-.896 37.124 37.124 0 0 0 5.12-1.958 36.307 36.307 0 0 0 6.15-3.67 35.923 35.923 0 0 0 9.489-10.48 36.558 36.558 0 0 0 2.422-4.84 37.051 37.051 0 0 0 1.716-5.25c.299-1.208.542-2.443.725-3.701.275-1.887.417-3.827.417-5.811s-.142-3.925-.417-5.811a38.734 38.734 0 0 0-1.215-5.494 36.68 36.68 0 0 0-3.648-8.298 35.923 35.923 0 0 0-9.489-10.48 36.347 36.347 0 0 0-6.15-3.67 37.124 37.124 0 0 0-5.12-1.958 37.67 37.67 0 0 0-3.624-.896 39.875 39.875 0 0 0-7.68-.737c-21.162 0-37.345 16.183-37.345 37.345 0 21.159 16.183 37.342 37.345 37.342z"></path></g></svg>
+            				<!-- <img ng-src="{{'//graph.facebook.com/'+ order.data.data.orderData.customer_id  + '/picture?width=50&height=50'}}" class="Qgzj8 gqwaM"> -->
+                    <!-- <span data-icon="default-user" class=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 212 212" width="42" height="42"><path fill="#DFE5E7" d="M106.251.5C164.653.5 212 47.846 212 106.25S164.653 212 106.25 212C47.846 212 .5 164.654.5 106.25S47.846.5 106.251.5z"></path><g fill="#FFF"><path d="M173.561 171.615a62.767 62.767 0 0 0-2.065-2.955 67.7 67.7 0 0 0-2.608-3.299 70.112 70.112 0 0 0-3.184-3.527 71.097 71.097 0 0 0-5.924-5.47 72.458 72.458 0 0 0-10.204-7.026 75.2 75.2 0 0 0-5.98-3.055c-.062-.028-.118-.059-.18-.087-9.792-4.44-22.106-7.529-37.416-7.529s-27.624 3.089-37.416 7.529c-.338.153-.653.318-.985.474a75.37 75.37 0 0 0-6.229 3.298 72.589 72.589 0 0 0-9.15 6.395 71.243 71.243 0 0 0-5.924 5.47 70.064 70.064 0 0 0-3.184 3.527 67.142 67.142 0 0 0-2.609 3.299 63.292 63.292 0 0 0-2.065 2.955 56.33 56.33 0 0 0-1.447 2.324c-.033.056-.073.119-.104.174a47.92 47.92 0 0 0-1.07 1.926c-.559 1.068-.818 1.678-.818 1.678v.398c18.285 17.927 43.322 28.985 70.945 28.985 27.678 0 52.761-11.103 71.055-29.095v-.289s-.619-1.45-1.992-3.778a58.346 58.346 0 0 0-1.446-2.322zM106.002 125.5c2.645 0 5.212-.253 7.68-.737a38.272 38.272 0 0 0 3.624-.896 37.124 37.124 0 0 0 5.12-1.958 36.307 36.307 0 0 0 6.15-3.67 35.923 35.923 0 0 0 9.489-10.48 36.558 36.558 0 0 0 2.422-4.84 37.051 37.051 0 0 0 1.716-5.25c.299-1.208.542-2.443.725-3.701.275-1.887.417-3.827.417-5.811s-.142-3.925-.417-5.811a38.734 38.734 0 0 0-1.215-5.494 36.68 36.68 0 0 0-3.648-8.298 35.923 35.923 0 0 0-9.489-10.48 36.347 36.347 0 0 0-6.15-3.67 37.124 37.124 0 0 0-5.12-1.958 37.67 37.67 0 0 0-3.624-.896 39.875 39.875 0 0 0-7.68-.737c-21.162 0-37.345 16.183-37.345 37.345 0 21.159 16.183 37.342 37.345 37.342z"></path></g></svg></span> -->
+            			</div>
+            		</div>
+            		<div class="item-content">
+            			<div class="title">
+            				<div class="title-text">
+            					<span dir="auto" class="customer-name" ng-if="!order.data.is_cancel">
+                        <span ng-if="display_mode">
+                          <strong>
+                            {{$index+1}}. 
+                          </strong>
+                        </span>
+                        {{order.data.data.customerData.realName}}     
+                      </span>
+                      <span dir="auto" class="customer-name" ng-if="order.data.is_cancel" style="color:red">
+                        (Đơn đã hủy trên hệ thống) 
+                      </span>
+            				</div>
+            				<div class="created-time">
+                      <button class="btn btn-sm btn-link toggle-printed" ng-click="togglePrintedItem(order.key); $event.stopPropagation();" title="Đánh dấu In/Chưa in">
+                        <span class="{{order.data.printed == true ? 'printed' : ''}} print-icon">
+                        <svg viewBox="0 0 24 24" id="gridicons-print" class="actions-icon" fill="currentColor" width="12" height="12"><g><path d="M9 16h6v2H9v-2zm13 1h-3v3c0 1.105-.895 2-2 2H7c-1.105 0-2-.895-2-2v-3H2V9c0-1.105.895-2 2-2h1V5c0-1.105.895-2 2-2h10c1.105 0 2 .895 2 2v2h1c1.105 0 2 .895 2 2v8zM7 7h10V5H7v2zm10 7H7v6h10v-6zm3-3.5c0-.828-.672-1.5-1.5-1.5s-1.5.672-1.5 1.5.672 1.5 1.5 1.5 1.5-.672 1.5-1.5z"></path></g></svg>
+                      </span>
+                      </button>
+                      <span class="time caps">
+                        {{ order.data.created_time | date:'HH:mm dd/MM'}}    
+                    </span></div>
+            			</div>
+            			<div class="item-info">
+            				<div class="info-text">
+            					<span dir="auto" title="{{order.data.data.customerData.addresss}}" ng-if="!order.data.viettel_post_code">
+            					{{order.data.data.customerData.addresss}}
+            				</span>
+                    <div ng-if="order.data.viettel_post_code">
+                      <div class="row">
+                        <div class="col-md-7 {{order.data.viettel_post_station_id == 1 ? 'default-station' : 'green'}}" style="font-size:14px;">
+                          {{order.data.viettel_post_station_name}}
+                          <!-- <span>COD: {{order.data.viettel_post_data.MONEY_COLLECTION | number:0}}</span>
+                          <span> FEE: {{order.data.viettel_post_data.MONEY_TOTALFEE | number:0}}</span> -->
+                        </div>
+                        <div class="col-md-5">
+                          <div class="row viettel-post-flag"></div>
+                        </div>
+                        
+                      </div>
+                    </div>
+            				</div>
+            			</div>
+            		</div>
+            	</div>
+            </div>
+            <div class="shipping-item load-more" ng-if="!display_id">
+              <button class="btn btn-primary" ng-click="getNextShippingItems()">Tải thêm đơn hàng</button>
+            </div>
+            
+            <!-- /.shipping items -->
+         </nav>
+
+         <!-- /.stacked-menu -->
+      </section>
+      <!-- /.aside-menu -->
+   </div>
+   <!-- /.aside-content -->
+</aside>
+<main class="app-main" ng-if="activeOrder">
+	<div class="wrapper">
+		<div class="page">
+			<div class="sidebar-backdrop"></div>
+			<div class="order-col">
+        <div class="header">
+          <div class="container fill">
+            <div class="row fill">
+              <div class="col-md-5">
+                <div class="row">
+                  <div class="col-md-2">
+                    <div class="item-avatar">
+                      <div class="avatar" style="height: 46px;width: 46px;margin: 7px 0;">
+                        <img ng-src="{{'//graph.facebook.com/' + activeOrder.data.data.orderData.page_id  + '/picture?width=50&amp;height=50'}}" />
+                      </div>
+                    </div>
+                  </div>
+                  <div  class="col-md-10" style="text-align: left;">
+                    <span class="header-title">
+                      {{filterById(fanpages, activeOrder.data.data.orderData.page_id).name}}
+                    </span>
+                  </div>
+                </div>
+                <!-- <div class="ring-container"><div class="ringring"></div><div class="circle"></div></div> -->
+              </div>
+              <div class="col-md-7">
+                <div class="actions" ng-if="!activeOrder.data.is_cancel" >
+                  <ul>
+                    <li>
+                      <button class="btn btn-link logistics viettel-post" ng-click="createViettelPost()" data-toggle="tooltip" data-placement="bottom" title="Tạo đơn hàng Viettel Post">
+                        <span class="viettel-post"></span>
+                      </button>
+                    </li>
+                    <li>
+                      <button class="btn btn-link logistics ghn" ng-click="createGHN()">
+                        <span class="ghn"></span>
+                      </button>
+                    </li>
+                    <li>
+                      <button class="btn btn-link logistics shipper" ng-click="createShip()">
+                        <span class="shipper"></span>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="chat-body">
+          <div class="chat-content" style="height: {{windowsHeight-(60+80)}}px;overflow-y: auto;">
+            
+            <!-- <pre>
+              {{activeOrder | json}}
+            </pre> -->
+            
+            <div ng-if="activeOrder.data.viettel_post_data" class="p-3 pt-0 pb-5">
+              <!-- <hr> -->
+              <h5>Chi tiết đơn hàng đã tạo</h5>
+              <table class="table table-hover mt-2">
+                <!-- <thead>
+                  <tr>
+                    <th>Người gửi</th>
+                    <th>{{activeOrder.data.viettel_post_data.SENDER_FULLNAME}}</th>
+                  </tr>
+                </thead> -->
+                <tbody>
+                  <tr>
+                    <td style="width: 20%"><strong>Mã vận đơn:</strong></td>
+                    <td>{{activeOrder.data.viettel_post_code}}</td>
+                  </tr>
+                  <tr>
+                    <td style="width: 20%"><strong>Bưu cục:</strong></td>
+                    <td class="{{activeOrder.data.viettel_post_station_id == 1 ? 'default-station' : 'green'}}" style="font-size: 16px;font-weight: 700">{{activeOrder.data.viettel_post_station_name}}</td>
+                  </tr>
+                  <tr>
+                    <td style="width: 20%"><strong>Người gửi:</strong></td>
+                    <td>{{activeOrder.data.viettel_post_data.SENDER_FULLNAME}}</td>
+                  </tr>
+                  <tr>
+                    <td style="width: 20%"><strong>Địa chỉ:</strong></td>
+                    <td>{{activeOrder.data.viettel_post_data.SENDER_ADDRESS}}</td>
+                  </tr>
+                  <tr>
+                    <td style="width: 20%"></td>
+                    <td>Phường: {{activeOrder.data.viettel_post_data.SENDER_WARD}} - 
+                    Quận: {{activeOrder.data.viettel_post_data.SENDER_DISTRICT}} - 
+                    TP: {{activeOrder.data.viettel_post_data.SENDER_PROVINCE}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 20%"><strong>SĐT:</strong></td>
+                    <td>{{activeOrder.data.viettel_post_data.SENDER_PHONE}}</td>
+                  </tr>
+                </tbody>
+              </table>
+               <table class="table table-hover mt-2">
+                <!-- <thead>
+                  <tr>
+                    <th>Người gửi</th>
+                    <th>{{activeOrder.data.viettel_post_data.SENDER_FULLNAME}}</th>
+                  </tr>
+                </thead> -->
+                <tbody>
+                  <tr>
+                    <td style="width: 20%"><strong>Người nhận:</strong></td>
+                    <td>{{activeOrder.data.viettel_post_data.RECEIVER_FULLNAME}}</td>
+                  </tr>
+                  <tr>
+                    <td style="width: 20%"><strong>Địa chỉ:</strong></td>
+                    <td>{{activeOrder.data.viettel_post_data.RECEIVER_ADDRESS}}</td>
+                  </tr>
+                  <tr>
+                    <td style="width: 20%"></td>
+                    <td>Phường: {{activeOrder.data.viettel_post_data.RECEIVER_WARD}} - 
+                    Quận: {{activeOrder.data.viettel_post_data.RECEIVER_DISTRICT}} - 
+                    TP: {{activeOrder.data.viettel_post_data.RECEIVER_PROVINCE}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 20%"><strong>SĐT:</strong></td>
+                    <td>{{activeOrder.data.viettel_post_data.RECEIVER_PHONE}}</td>
+                  </tr>
+                </tbody>
+              </table>
+               <table class="table table-hover mt-2">
+                <!-- <thead>
+                  <tr>
+                    <th>Người gửi</th>
+                    <th>{{activeOrder.data.viettel_post_data.SENDER_FULLNAME}}</th>
+                  </tr>
+                </thead> -->
+                <tbody>
+                  <tr>
+                    <td style="width: 20%"><strong>Ghi chú giao hàng:</strong></td>
+                    <td>{{activeOrder.data.viettel_post_data.ORDER_NOTE || 'Không có ghi chú'}}</td>
+                  </tr>
+                  <tr>
+                    <td style="width: 20%"><strong>COD:</strong></td>
+                    <td>{{activeOrder.data.viettel_post_data.MONEY_COLLECTION | number: 0}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- {{activeOrder | json}} -->
+            </div>
+            <div ng-if="!activeOrder.data.viettel_post_code && !activeOrder.data.is_cancel" class="mb-5 pb-3">
+              <div class="empty-content">
+                <img src="/assets/images/illustration-empty-results.svg" width="400" class="empty-content__illustration">
+                <!-- <h2 class="empty-content__title">Đơn hàng chưa được tạo</h2> -->
+                <h3 class="empty-content__line">Đơn hàng chưa được tạo</h3>
+                <button class="btn btn-primary btn-lg" ng-click="createViettelPost()">Tạo đơn Viettel Post</button>
+                <button class="btn btn-secondary btn-lg" ng-click="print()">In phiếu xuất kho</button>
+                <!-- <a class="empty-content__action btn btn-secondary" href="/discover">Secondary action</a> -->
+              </div>
+            </div>
+            <div ng-if="activeOrder.data.is_cancel" class="mb-5 pb-3">
+              <div class="empty-content">
+                <img src="/assets/images/illustration-empty-results.svg" width="400" class="empty-content__illustration">
+                <!-- <h2 class="empty-content__title">Đơn hàng chưa được tạo</h2> -->
+                <h3 class="empty-content__line">Đơn hàng đã hủy trên hệ thống</h3>
+                <!-- <a class="empty-content__action btn btn-secondary" href="/discover">Secondary action</a> -->
+              </div>
+            </div>
+            <div ng-include="'/src/ship/partials/chat-log.html'"></div>
+          </div>
+          <div class="write-chat {{isChatSelect ? 'focus' : ''}}">
+            <div class="input-chat">
+              <textarea ng-model="noteData.text" class="input-msg ng-pristine ng-valid ng-empty ng-touched" id="fb_info_message" name="input_message" placeholder="Nhập ghi chú đơn hàng và Enter để thêm" autocomplete="on" style="" ng-focus="focusChat()" ng-blur="blurChat()" comment-enter="submitComment(activeOrder.key)"></textarea>
+            </div>
+            <div class="function_message">
+              <ul class="list_action">
+                    <li id="open_image_" class="open_image_post">
+                       <div>
+                          <a class="open_file btn btn-link" ng-click="submitComment(activeOrder.key)">
+                             <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="#263238" fill-opacity=".45" d="M1.101 21.757L23.8 12.028 1.101 2.3l.011 7.912 13.623 1.816-13.623 1.817-.011 7.912z"></path></svg>
+                          </a>
+                       </div>
+                    </li>
+                    
+                 </ul>
+            </div>
+          </div>
+        </div>
+				<!-- {{activeOrder.key}} -->
+        
+			</div>
+      <div class="customer-col">
+        <div class="header">
+          <!-- {{currentMember}} -->
+          <div class="container fill">
+            <div class="row fill">
+              <div class="col-md-8">
+                <span class="header-title">THÔNG TIN ORDER</span>
+              </div>
+              <div class="col-md-4">
+                <div class="actions">
+                  <ul>
+                    <li>
+                      <button class="btn btn-link" ng-click="print()">
+                        <svg viewBox="0 0 24 24" id="gridicons-print" class="actions-icon" fill="currentColor" width="24" height="24"><g><path d="M9 16h6v2H9v-2zm13 1h-3v3c0 1.105-.895 2-2 2H7c-1.105 0-2-.895-2-2v-3H2V9c0-1.105.895-2 2-2h1V5c0-1.105.895-2 2-2h10c1.105 0 2 .895 2 2v2h1c1.105 0 2 .895 2 2v8zM7 7h10V5H7v2zm10 7H7v6h10v-6zm3-3.5c0-.828-.672-1.5-1.5-1.5s-1.5.672-1.5 1.5.672 1.5 1.5 1.5 1.5-.672 1.5-1.5z"></path></g></svg>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <div class="customer-information customer-pane" ng-if="activeOrder">
+            <div class="threadChat__avatar ">
+              <div class="avatar avatar--sl">
+                <div class="avatar-img ">
+                  <!-- <img ng-src="//graph.facebook.com/{{activeOrder.data.data.orderData.customer_id}}/picture?width=100&height=100" class="img"> -->
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 212 212" width="62" height="62"><path fill="#DFE5E7" d="M106.251.5C164.653.5 212 47.846 212 106.25S164.653 212 106.25 212C47.846 212 .5 164.654.5 106.25S47.846.5 106.251.5z"></path><g fill="#FFF"><path d="M173.561 171.615a62.767 62.767 0 0 0-2.065-2.955 67.7 67.7 0 0 0-2.608-3.299 70.112 70.112 0 0 0-3.184-3.527 71.097 71.097 0 0 0-5.924-5.47 72.458 72.458 0 0 0-10.204-7.026 75.2 75.2 0 0 0-5.98-3.055c-.062-.028-.118-.059-.18-.087-9.792-4.44-22.106-7.529-37.416-7.529s-27.624 3.089-37.416 7.529c-.338.153-.653.318-.985.474a75.37 75.37 0 0 0-6.229 3.298 72.589 72.589 0 0 0-9.15 6.395 71.243 71.243 0 0 0-5.924 5.47 70.064 70.064 0 0 0-3.184 3.527 67.142 67.142 0 0 0-2.609 3.299 63.292 63.292 0 0 0-2.065 2.955 56.33 56.33 0 0 0-1.447 2.324c-.033.056-.073.119-.104.174a47.92 47.92 0 0 0-1.07 1.926c-.559 1.068-.818 1.678-.818 1.678v.398c18.285 17.927 43.322 28.985 70.945 28.985 27.678 0 52.761-11.103 71.055-29.095v-.289s-.619-1.45-1.992-3.778a58.346 58.346 0 0 0-1.446-2.322zM106.002 125.5c2.645 0 5.212-.253 7.68-.737a38.272 38.272 0 0 0 3.624-.896 37.124 37.124 0 0 0 5.12-1.958 36.307 36.307 0 0 0 6.15-3.67 35.923 35.923 0 0 0 9.489-10.48 36.558 36.558 0 0 0 2.422-4.84 37.051 37.051 0 0 0 1.716-5.25c.299-1.208.542-2.443.725-3.701.275-1.887.417-3.827.417-5.811s-.142-3.925-.417-5.811a38.734 38.734 0 0 0-1.215-5.494 36.68 36.68 0 0 0-3.648-8.298 35.923 35.923 0 0 0-9.489-10.48 36.347 36.347 0 0 0-6.15-3.67 37.124 37.124 0 0 0-5.12-1.958 37.67 37.67 0 0 0-3.624-.896 39.875 39.875 0 0 0-7.68-.737c-21.162 0-37.345 16.183-37.345 37.345 0 21.159 16.183 37.342 37.345 37.342z"></path></g></svg>
+                </div>
+              </div>
+            </div>
+            <div class="threadChat__info">
+              <div class="name threadChat__item">
+                {{activeOrder.data.data.customerData.realName}}
+              </div>
+              <div class="phone threadChat__item">
+                <span class="phone-number">{{activeOrder.data.data.customerData.recievedPhone}}
+                </span>
+                <span style="padding-left: 15px;text-transform: uppercase;font-weight: 300;">
+                  Năm sinh: <span style="color: #00a1f2;">{{activeOrder.data.data.customerData.birthDay}}</span>
+                </span>
+              </div>
+              <div class="address threadChat__item">
+                <!-- <span>
+                  <svg height="18" class="octicon octicon-calendar" viewBox="0 0 14 16" version="1.1" width="18" aria-hidden="true"><path fill-rule="evenodd" d="M13 2h-1v1.5c0 .28-.22.5-.5.5h-2c-.28 0-.5-.22-.5-.5V2H6v1.5c0 .28-.22.5-.5.5h-2c-.28 0-.5-.22-.5-.5V2H2c-.55 0-1 .45-1 1v11c0 .55.45 1 1 1h11c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm0 12H2V5h11v9zM5 3H4V1h1v2zm6 0h-1V1h1v2zM6 7H5V6h1v1zm2 0H7V6h1v1zm2 0H9V6h1v1zm2 0h-1V6h1v1zM4 9H3V8h1v1zm2 0H5V8h1v1zm2 0H7V8h1v1zm2 0H9V8h1v1zm2 0h-1V8h1v1zm-8 2H3v-1h1v1zm2 0H5v-1h1v1zm2 0H7v-1h1v1zm2 0H9v-1h1v1zm2 0h-1v-1h1v1zm-8 2H3v-1h1v1zm2 0H5v-1h1v1zm2 0H7v-1h1v1zm2 0H9v-1h1v1z"></path></svg>
+                </span> -->
+                <span>
+                  {{activeOrder.data.data.customerData.addresss}}
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="scrollable" style="height: {{windowsHeight-(60+110)}}px;">
+            <div class="seller-info customer-pane">
+            Chốt bởi <strong>{{filterById(telesales, activeOrder.data.data.orderData.seller_will_call_id).last_name}}</strong> lúc {{activeOrder.data.data.created_time | date: 'h:mma dd-MM-yyyy'}}
+          </div>
+          <div class="order-info customer-pane">
+            <!-- {{activeOrder.data.data.customerData.products}} -->
+            <!-- <div class="table100 ver2 m-b-110">
+              <div class="table100-body js-pscroll ps ps--active-y">
+                <table>
+                  <thead>
+                    <tr class="row100 head">
+                      <th class="cell100 column1">Tên sản phẩm ({{activeOrder.data.data.customerData.products.length}})</th>
+                      <th class="cell100 column2">SL</th>
+                      <th class="cell100 column3">Ghi chú</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="row100 body" ng-repeat="product in activeOrder.data.data.customerData.products">
+                      <td class="cell100 column1">{{findProduct(product.id).name || 'Không rõ'}}</td>
+                      <td class="cell100 column2">{{product.count}}</td>
+                      <td class="cell100 column3">{{product.note}}</td>
+                    </tr>
+
+                  </tbody>
+                </table>
+          </div>
+            </div> -->
+            <h6>Danh sách sản phẩm ({{activeOrder.data.data.customerData.products.length}})</h6>
+            <ul class="pl-0 mb-3">
+            <li class="list-group-item d-flex justify-content-between lh-condensed {{$index % 2 == 0 ? 'bg-light' : ''}}"
+            ng-repeat="product in activeOrder.data.data.customerData.products track by $index">
+              <div class="{{$index % 2 == 0 ? 'text-success' : ''}}">
+                <span class="my-0">{{findProduct(product.id).name || 'Không rõ'}}</span>
+                <span class="text-muted">{{product.note}}</span>
+              </div>
+              <span class="{{$index % 2 == 0 ? 'text-success' : 'text-muted'}}">{{product.count}}</span>
+            </li>
+            <!-- <li class="list-group-item d-flex justify-content-between bg-light">
+              <div class="text-success">
+                <h6 class="my-0">Promo code</h6>
+                <small>EXAMPLECODE</small>
+              </div>
+              <span class="text-success">-$5</span>
+            </li> -->
+          </ul>
+          </div>
+          <div class="packing-note customer-pane" ng-if="activeOrder.data.data.customerData.customerNote">
+            <strong style="font-size: 14px;font-weight: 500;">Ghi chú đóng hàng: </strong>
+            <span class="note-content">{{activeOrder.data.data.customerData.customerNote}}</span>
+          </div>
+          <div class="packing-note customer-pane" ng-if="activeOrder.data.data.customerData.orderNote">
+            <strong style="font-size: 14px;font-weight: 500;">Ghi chú giao hàng: </strong>
+            <span class="note-content">{{activeOrder.data.data.customerData.orderNote}}</span>
+          </div>
+          <div class="packing-cod customer-pane">
+            <div class="cod-title">Giá trị đơn hàng: </div>
+            <div class="cod">
+              {{activeOrder.data.data.customerData.cod | number: 0}}
+            </div>
+          </div>
+          <div class="packing-cod customer-pane" ng-if="activeOrder.is_dublicated == true">
+            <div class="cod-title" style="color:red;font-size:14px;">Chú ý: Hệ thống phát hiện thấy đơn hàng này bị trùng, vui lòng kiểm tra kỹ trước khi tạo</div>
+          </div>
+          
+          </div>
+        </div>
+		</div>
+	</div>
+</main>
+<div class="app-backdrop"></div>
+	</div>
