@@ -46,16 +46,13 @@
                               <input type="checkbox" class="check_people" value="on">
                            </div> -->
                            <div class="clearfix">
-                              <div class="" ng-if="!order.type">
-                                 <img ng-src="{{'//graph.facebook.com/' + order.customer_id  + '/picture?width=50&amp;height=50'}}" alt="avatar" title="{{order.customer_name}}">
-                              </div>
-                              <div class="" ng-if="order.type" style="opacity: 0.6">
-                                 <img ng-src="/assets/images/default-avatar-contact.svg" alt="avatar" title="{{order.customer_name}}">
+                              <div class="" style="opacity: 0.35">
+                                 <img ng-src="assets/images/default-avatar-contact.svg" alt="avatar" title="{{order.data.orderData.customer_name}}">
                               </div>
                               <div class="info">
                                  <div class="title">
                                     <span class="name">
-                                       {{order.customer_name}} [by {{getTrucPageById(order.truc_page)}}]
+                                       {{order.customer_name}}
                                     </span>
                                  </div>
                                  <span class="live_chat">

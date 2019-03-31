@@ -39,21 +39,7 @@
 				      <div class="_3nmg">
 				         <div id="u_fetchstream_18_5">
 				            <div>
-				            	<div style="width: 100%;height: 30px;background: red;text-align: center;"
-				            	ng-if="orderData.type==1">
-				            		<span style="line-height: 30px;color:yellow">Thêm Order từ tin nhắn khách hàng</span>
-				            	</div>
-				               <div class="_5qu_ mb-2">
-				                  <div class="_5aj7">
-				                     <div class="_5qw1 _4bl9">
-				                     	<span class="_wrn _213j _4ehf _1fmg _1fmg">
-					                     	<label class="_55r1 _55r2 _58ak _3ct8">
-					                     		<input class="_58al" type="text" placeholder="Paste link hội thoại từ Pancake" ng-model="conversationLink.text" graph-enter="" ng-change="onConversationLinkChange()"></label>
-					                     </span>
-					                 </div>
-				                  </div>
-				               </div>
-				               <div class="_5qu_ mb-2" hidden="">
+				               <!-- <div class="_5qu_ mb-2" hidden="">
 				               	Link Pancake
 				                  <div class="_5aj7">
 
@@ -64,7 +50,7 @@
 					                     </span>
 					                 </div>
 				                  </div>
-				               </div>
+				               </div> -->
 				               <div class="_5qu_ mb-2">
 				                  <div class="_5aj7">
 				                     <div class="_5qw1 _4bl9 pr-2">
@@ -82,15 +68,18 @@
 				                  </div>
 				               </div>
 				               <div class="_5qu_ mb-2">
+					               <select class="form-control input-sm" select2 ng-model="orderData.page_id" data-placeholder="Pick a number" ng-options="s.id as s.name for s in fanpages" style="width: 100%">
+	                                  <option value=""></option>
+	                                </select>
+	                            </div>
+				               <div class="_5qu_ mb-2">
 				                  <div class="_5aj7">
 				                     <div class="_5qw1 _4bl9 _4vhi">
 				                     	<textarea rows="2" class="width-full" name="impressum" placeholder="Ghi chú dành cho telesale" maxlength="2000"  add-order-enter="submitOrder()" ng-model="orderData.admin_note"></textarea>
 					                 </div>
 				                  </div>
 				               </div>
-				               <div class="_5qu_ mb-2">
-				               		<div><div display="block" class="uiInputLabel clearfix"><label class="uiInputLabelInput _55sg _kv1"><input id="js_74z" type="checkbox"  ng-model="sendThanks"><span class="_66ul"></span></label><label class="_4wb4 uiInputLabelLabel" for="js_74z"><div>Gửi tin nhắn cảm ơn khách hàng</div></label></div></div>
-				               </div>
+
 				               <div class="_5qu_ mb-3 mt-3">
 					               	<div class="_449e _4xef">
 									   <table cols="2" class="uiGrid _51mz" cellspacing="0" cellpadding="0">

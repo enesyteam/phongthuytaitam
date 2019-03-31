@@ -2,6 +2,7 @@ m_admin.controller('MainCtrl',
     function($rootScope, $window, $scope, $http, $filter, $timeout, firebaseService,  
         cfpLoadingBar, Facebook, MFirebaseService, MFacebookService, MUtilitiesService, 
         fanpages, telesales, statuses, access_token, spinnerService) {
+        $rootScope.fanpages = fanpages;
 // checkTwoDatesEqual
         // listen for order change
         // $rootScope.todayReport = [];
@@ -718,138 +719,138 @@ m_admin.controller('MainCtrl',
 
         //////////// GRAPH
         var graphFacebook = function(){
-            $scope.usersCount = 1;
-            // if(!$rootScope.conversationLink || $rootScope.conversationLink.length==0){
-            //     return;
+            // $scope.usersCount = 1;
+            // // if(!$rootScope.conversationLink || $rootScope.conversationLink.length==0){
+            // //     return;
+            // // }
+            // $scope.pageData = null;
+            // $scope.postData = null;
+            // $scope.messageData = null;
+            // $scope.commentData = null;
+            // $scope.isGraphing = true;
+            // $scope.orderData.customer_mobile = null;
+
+            // $scope.user_name = {
+            //     text: null
+            // };
+            // // alert($rootScope.conversationLink);
+            // // graph page
+            // if($rootScope.conversationLink.text.indexOf('inbox') !== -1){
+            //     // $scope.show_user_name_input = true;
+            //     // $scope.orderData.customer_name = null;
+            //     // MUtilitiesService.AlertError('Vui lòng paste tên khách hàng vào ô dưới');
+            //     // return;
+            //     // resetOrderData();
+            //     $scope.orderData.type = 1; //message
+
+            //     var page_name_or_id = $rootScope.conversationLink.text.split('/')[3];
+
+            //     MFacebookService.graphPage(page_name_or_id, $rootScope.access_token).then(function(response){
+            //         // console.log(response);
+            //         $scope.$apply(function(){
+            //             $scope.pageData = response;
+            //             $scope.orderData.page_id = $scope.pageData.id;
+            //             $scope.isGraphing = false;
+            //         });
+            //     });
+                
             // }
-            $scope.pageData = null;
-            $scope.postData = null;
-            $scope.messageData = null;
-            $scope.commentData = null;
-            $scope.isGraphing = true;
-            $scope.orderData.customer_mobile = null;
-
-            $scope.user_name = {
-                text: null
-            };
-            // alert($rootScope.conversationLink);
-            // graph page
-            if($rootScope.conversationLink.text.indexOf('inbox') !== -1){
-                // $scope.show_user_name_input = true;
-                // $scope.orderData.customer_name = null;
-                // MUtilitiesService.AlertError('Vui lòng paste tên khách hàng vào ô dưới');
-                // return;
-                // resetOrderData();
-                $scope.orderData.type = 1; //message
-
-                var page_name_or_id = $rootScope.conversationLink.text.split('/')[3];
-
-                MFacebookService.graphPage(page_name_or_id, $rootScope.access_token).then(function(response){
-                    // console.log(response);
-                    $scope.$apply(function(){
-                        $scope.pageData = response;
-                        $scope.orderData.page_id = $scope.pageData.id;
-                        $scope.isGraphing = false;
-                    });
-                });
-                
-            }
             
-            else{
-                 $scope.orderData.type = null; //message
-                // resetOrderData();
-                // comment giữ nguyên
-                // console.log('This conversation is comment');
-                var l = $rootScope.conversationLink.text.split('/');
-                var conversationId = l[l.length - 1];
+            // else{
+            //      $scope.orderData.type = null; //message
+            //     // resetOrderData();
+            //     // comment giữ nguyên
+            //     // console.log('This conversation is comment');
+            //     var l = $rootScope.conversationLink.text.split('/');
+            //     var conversationId = l[l.length - 1];
 
-                MFacebookService.graphPermalink(conversationId, $rootScope.access_token).then(function(response){
-                    // console.log(response);
-                    var link = response.permalink_url;
-                    // console.log(response.permalink_url);
-                    var page_name = (link.indexOf('permalink') !== -1) ? link : link.split('/')[3];
+            //     MFacebookService.graphPermalink(conversationId, $rootScope.access_token).then(function(response){
+            //         // console.log(response);
+            //         var link = response.permalink_url;
+            //         // console.log(response.permalink_url);
+            //         var page_name = (link.indexOf('permalink') !== -1) ? link : link.split('/')[3];
 
-                    // graph page
-                    MFacebookService.graphPage(page_name, $rootScope.access_token).then(function(response){
-                        // console.log(response);
-                        $scope.$apply(function(){
-                            $scope.pageData = response;
-                        })
-                        getToken(response.id).then(function(token){
-                            $scope.$apply(function(){
-                                $scope.current_token = token;
-                            })
-                            // console.log(token);
-                            // graph post
-                            var p = conversationId.split('_');
-                            var post_id = response.id + "_" + p[0];
-                            MFacebookService.graphPost(post_id, token).then(function(response){
-                                $scope.$apply(function(){
-                                    $scope.postData = response;
-                                    $scope.orderData.post_id = post_id;
-                                })
-                            })
+            //         // graph page
+            //         MFacebookService.graphPage(page_name, $rootScope.access_token).then(function(response){
+            //             // console.log(response);
+            //             $scope.$apply(function(){
+            //                 $scope.pageData = response;
+            //             })
+            //             getToken(response.id).then(function(token){
+            //                 $scope.$apply(function(){
+            //                     $scope.current_token = token;
+            //                 })
+            //                 // console.log(token);
+            //                 // graph post
+            //                 var p = conversationId.split('_');
+            //                 var post_id = response.id + "_" + p[0];
+            //                 MFacebookService.graphPost(post_id, token).then(function(response){
+            //                     $scope.$apply(function(){
+            //                         $scope.postData = response;
+            //                         $scope.orderData.post_id = post_id;
+            //                     })
+            //                 })
 
-                            MFacebookService.graphComments(conversationId, token).then(function(response){
-                                $scope.$apply(function(){
-                                    // console.log(response);
-                                    // var phoneExp = /(09|01[2|6|8|9])+([0-9]{8})\b/;
-                                    // for (var i = 0; i < response.comments.data.length; i++) {
-                                    //     console.log(response.comments.data[i].message);
-                                    //     response.comments.data[i].message.replace(phoneExp, 'sdt');
-                                    // }
-                                    $scope.commentData = response;
-                                    // for (var i = $scope.commentData.comments.data.length - 1; i >= 0; i--) {
-                                    //      $scope.commentData.comments.data[i].message.replace('*', 'sdfsdf');
-                                    // }
-                                    makeOrderDataFromComment(response);
-                                    $scope.orderData.conversation_id = conversationId;
-                                    $scope.isGraphing = false;
-                                })
-                            })
-                            .catch(function(err){
-                                MUtilitiesService.AlertError(err);
+            //                 MFacebookService.graphComments(conversationId, token).then(function(response){
+            //                     $scope.$apply(function(){
+            //                         // console.log(response);
+            //                         // var phoneExp = /(09|01[2|6|8|9])+([0-9]{8})\b/;
+            //                         // for (var i = 0; i < response.comments.data.length; i++) {
+            //                         //     console.log(response.comments.data[i].message);
+            //                         //     response.comments.data[i].message.replace(phoneExp, 'sdt');
+            //                         // }
+            //                         $scope.commentData = response;
+            //                         // for (var i = $scope.commentData.comments.data.length - 1; i >= 0; i--) {
+            //                         //      $scope.commentData.comments.data[i].message.replace('*', 'sdfsdf');
+            //                         // }
+            //                         makeOrderDataFromComment(response);
+            //                         $scope.orderData.conversation_id = conversationId;
+            //                         $scope.isGraphing = false;
+            //                     })
+            //                 })
+            //                 .catch(function(err){
+            //                     MUtilitiesService.AlertError(err);
 
-                            });
-                        })
-                        .catch(function(err){
-                            MUtilitiesService.AlertError(err);
+            //                 });
+            //             })
+            //             .catch(function(err){
+            //                 MUtilitiesService.AlertError(err);
 
-                            return;
-                        });
+            //                 return;
+            //             });
                         
-                    })
-                    .catch(function(err){
-                        // console.log(err);
-                        MUtilitiesService.AlertError(err);
-                    });
+            //         })
+            //         .catch(function(err){
+            //             // console.log(err);
+            //             MUtilitiesService.AlertError(err);
+            //         });
 
-                })
-                .catch(function(err){
-                    // console.log(err);
-                    // Cuộc hội thoại đã xóa hoặc không tồn tại
-                    // hiển thị hộp thoại yêu cầu nhập thủ công
-                    MUtilitiesService.AlertError(err);
-                    MUtilitiesService.showConfirmDialg('Cuộc hội thoại không tồn tại hoặc đã bị xóa',
-                                    'Bạn có muốn thêm Order thủ công?', 'Đồng ý', 'Bỏ qua')
-                    .then(function(response) {
-                        if (response) {
-                            console.log('...Bắt đầu thêm');
-                            $rootScope.addOrderManual();
-                            $scope.isGraphing = false;
-                        }
-                        else{
-                            console.log('Bỏ qua thêm thủ công');
-                        }
-                    })
-                    .catch(function(err){
-                        console.log(err);
-                        $scope.isGraphing = false;
-                    })
-                });
+            //     })
+            //     .catch(function(err){
+            //         // console.log(err);
+            //         // Cuộc hội thoại đã xóa hoặc không tồn tại
+            //         // hiển thị hộp thoại yêu cầu nhập thủ công
+            //         MUtilitiesService.AlertError(err);
+            //         MUtilitiesService.showConfirmDialg('Cuộc hội thoại không tồn tại hoặc đã bị xóa',
+            //                         'Bạn có muốn thêm Order thủ công?', 'Đồng ý', 'Bỏ qua')
+            //         .then(function(response) {
+            //             if (response) {
+            //                 console.log('...Bắt đầu thêm');
+            //                 $rootScope.addOrderManual();
+            //                 $scope.isGraphing = false;
+            //             }
+            //             else{
+            //                 console.log('Bỏ qua thêm thủ công');
+            //             }
+            //         })
+            //         .catch(function(err){
+            //             console.log(err);
+            //             $scope.isGraphing = false;
+            //         })
+            //     });
                 
-                // end graph
-            }
+            //     // end graph
+            // }
             
         }
 
@@ -1086,7 +1087,7 @@ m_admin.controller('MainCtrl',
             }
             $scope.usersCount = 1;
             $rootScope.assigned_to = null;
-            $rootScope.resetTrucPage()
+            //$rootScope.resetTrucPage()
         }
         $scope.resetOrder = function(){
             resetOrderData();
@@ -1103,6 +1104,9 @@ m_admin.controller('MainCtrl',
                 // MUtilitiesService.AlertError('Không thể thêm Order. Vui lòng xem lại dữ liệu', 'Thông báo');
                 return;
             }
+
+            // console.log($scope.orderData);
+            // return;
 
             // kiểm tra số điện thoại
             MUtilitiesService.validatePhoneNumber(false, 'Số điện thoại khách hàng', 
@@ -1152,33 +1156,9 @@ m_admin.controller('MainCtrl',
             MFirebaseService.onAddNewOrder($rootScope.currentMember, $scope.orderData, $rootScope.sellers)
                 .then(function(response) {
                     MUtilitiesService.AlertSuccessful(response, 'Thông báo');
-                    if($rootScope.sendThanks == true){
-                        // $scope.current_token
-                        if($scope.orderData.type == 1){
-                            // reply message
-                            // MFacebookService.replyMessage($scope.orderData.conversation_id,
-                            //     $scope.current_token, null, 'Cảm ơn anh/chị đã để lại số điện thoại. Nhân viên CSKH sẽ liên hệ với anh/chị trong thời gian sớm nhất. Anh/chị vui lòng để ý điện thoại ạ!').then(function(response){
-                            //     MUtilitiesService.AlertSuccessful(response)
-                            // })
-                            // .catch(function(err){
-                            //     MUtilitiesService.AlertError(err, 'Lỗi')
-                            // })
-                        }
-                        else{
-                            // reply comment
-                            MFacebookService.replyComment($scope.orderData.conversation_id,
-                                $scope.current_token, null, 'Cảm ơn anh/chị đã để lại số điện thoại. Nhân viên CSKH sẽ liên hệ với anh/chị trong thời gian sớm nhất. Anh/chị vui lòng để ý điện thoại ạ!').then(function(response){
-                                MUtilitiesService.AlertSuccessful(response)
-                            })
-                            .catch(function(err){
-                                MUtilitiesService.AlertError(err, 'Lỗi')
-                            })
-                        }
-
-                        $scope.$apply(function(){
+                    $scope.$apply(function(){
                             $rootScope.isSubmittingOrder = false;
                         })
-                    }
                     // reset order
                     $scope.resetOrder();
 
@@ -1225,7 +1205,7 @@ m_admin.controller('MainCtrl',
         }
         // TODO: SUBMIT NEW ORDER
         $scope.graph = function() {
-            graphFacebook();
+            //graphFacebook();
         }
         /////////////////////////////////////////////////////////////////////////////////////////////
         // $timeout(function() {

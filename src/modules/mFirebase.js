@@ -2590,6 +2590,24 @@
                             });
                     })
                 }
+
+                var getAllProducts = function () {
+                    return new Promise(function (resolve, reject) {
+                        var res = [];
+                        firebase.database().ref().child('products').once('value', function (snapshot) {
+                                angular.forEach(snapshot.val(), function (member) {
+                                    res.push(member);
+                                })
+                            })
+                            .then(function () {
+                                resolve(res);
+                            })
+                            .catch(function () {
+                                resolve(null)
+                            });
+                    })
+                }
+
                 var getAllMembers = function () {
                     return new Promise(function (resolve, reject) {
                         var res = [];
@@ -3421,6 +3439,7 @@
                     getShippingItemByDateRange: getShippingItemByDateRange,
                     getTrucPage: getTrucPage,
                     getAllShippings: getAllShippings,
+                    getAllProducts: getAllProducts,
                 }
 
             }

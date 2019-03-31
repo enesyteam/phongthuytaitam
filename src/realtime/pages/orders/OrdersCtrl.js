@@ -115,94 +115,94 @@ mRealtime.controller('OdersCtrl',
             })
         }
         // graph page
-        MFacebookService.graphPage($stateParams.page_id, $scope.currentAccessToken).then(function(response){
-            // console.log(response);
-            $scope.$apply(function(){
-                $scope.pageData = response;
-            })
-        })
-        .catch(function(err){
-            MUtilitiesService.AlertError(err, 'Lỗi');
-        })
+        // MFacebookService.graphPage($stateParams.page_id, $scope.currentAccessToken).then(function(response){
+        //     // console.log(response);
+        //     $scope.$apply(function(){
+        //         $scope.pageData = response;
+        //     })
+        // })
+        // .catch(function(err){
+        //     MUtilitiesService.AlertError(err, 'Lỗi');
+        // })
 
         //
-        if($stateParams.type==1){
-            // // messages
-            // MFacebookService.graphMessages($stateParams.conversation_id, $scope.currentAccessToken).then(function(response){
-            //     $scope.$apply(function(){
-            //         // console.log(response);
-            //         // chỉnh sửa thông tin chút
-            //         angular.forEach(response.messages.data, function(mes){
-            //             // mes = 'sdfsdfsdf';
-            //             if(mes.shares && mes.shares.data){
-            //                 if(mes.shares.data[0].link){
-            //                     // mes = 'sdfds';
-            //                     // console.log(mes.shares.data[0].link);
-            //                     // var link = $scope.detectMessageSharesLink(mes.shares.data[0].link);
+        // if($stateParams.type==1){
+        //     // // messages
+        //     // MFacebookService.graphMessages($stateParams.conversation_id, $scope.currentAccessToken).then(function(response){
+        //     //     $scope.$apply(function(){
+        //     //         // console.log(response);
+        //     //         // chỉnh sửa thông tin chút
+        //     //         angular.forEach(response.messages.data, function(mes){
+        //     //             // mes = 'sdfsdfsdf';
+        //     //             if(mes.shares && mes.shares.data){
+        //     //                 if(mes.shares.data[0].link){
+        //     //                     // mes = 'sdfds';
+        //     //                     // console.log(mes.shares.data[0].link);
+        //     //                     // var link = $scope.detectMessageSharesLink(mes.shares.data[0].link);
 
-            //                     MUtilitiesService.detectMessageSharesLink(mes.shares.data[0].link).then(function(result){
-            //                         if(result.type == 'photo'){
-            //                             mes.link = result.link;
-            //                         }
-            //                         else if(result.type == 'post'){
-            //                             // console.log(result);
-            //                             // alert('share is post');
-            //                             MFacebookService.graphPostAttachments($scope.pageData.id + '_' + result.id, $scope.currentAccessToken)
-            //                             .then(function(response){
-            //                                 // console.log(response);
-            //                                 // mes.x = response.data;
-            //                                 // return response.data.attachments.picture;
-            //                                 $scope.$apply(function(){
-            //                                     mes.post_share = response.data;
-            //                                 })
-            //                             })
-            //                             .catch(function(err){
-            //                                 // console.log(err);
-            //                                 MUtilitiesService.AlertError(err);
-            //                             });
-            //                         }
-            //                         else {
-            //                             return 'Trường hợp khác'
-            //                         }
-            //                     })
+        //     //                     MUtilitiesService.detectMessageSharesLink(mes.shares.data[0].link).then(function(result){
+        //     //                         if(result.type == 'photo'){
+        //     //                             mes.link = result.link;
+        //     //                         }
+        //     //                         else if(result.type == 'post'){
+        //     //                             // console.log(result);
+        //     //                             // alert('share is post');
+        //     //                             MFacebookService.graphPostAttachments($scope.pageData.id + '_' + result.id, $scope.currentAccessToken)
+        //     //                             .then(function(response){
+        //     //                                 // console.log(response);
+        //     //                                 // mes.x = response.data;
+        //     //                                 // return response.data.attachments.picture;
+        //     //                                 $scope.$apply(function(){
+        //     //                                     mes.post_share = response.data;
+        //     //                                 })
+        //     //                             })
+        //     //                             .catch(function(err){
+        //     //                                 // console.log(err);
+        //     //                                 MUtilitiesService.AlertError(err);
+        //     //                             });
+        //     //                         }
+        //     //                         else {
+        //     //                             return 'Trường hợp khác'
+        //     //                         }
+        //     //                     })
 
-            //                     // console.log(link);
+        //     //                     // console.log(link);
                                 
                                 
-            //                 }
-            //             }
-            //         })
-            //         $scope.messageData = response;
-            //     });
+        //     //                 }
+        //     //             }
+        //     //         })
+        //     //         $scope.messageData = response;
+        //     //     });
 
-            // })
-            // .catch(function(err){
-            //     MUtilitiesService.AlertError(err, 'Lỗi');
-            // })
-        }
-        else{
-            // graph post
-            MFacebookService.graphPost($stateParams.post_id, $scope.currentAccessToken).then(function(response){
-                $scope.$apply(function(){
-                    // console.log(response);
-                    $scope.postData = response;
-                })
-            })
-            .catch(function(err){
-                MUtilitiesService.AlertError(err, 'Lỗi');
-            })
+        //     // })
+        //     // .catch(function(err){
+        //     //     MUtilitiesService.AlertError(err, 'Lỗi');
+        //     // })
+        // }
+        // else{
+        //     // graph post
+        //     MFacebookService.graphPost($stateParams.post_id, $scope.currentAccessToken).then(function(response){
+        //         $scope.$apply(function(){
+        //             // console.log(response);
+        //             $scope.postData = response;
+        //         })
+        //     })
+        //     .catch(function(err){
+        //         MUtilitiesService.AlertError(err, 'Lỗi');
+        //     })
 
-            // also graph comments
-            MFacebookService.graphComments($stateParams.conversation_id, $scope.currentAccessToken).then(function(response){
-                $scope.$apply(function(){
-                    // console.log(response);
-                    $scope.commentData = response;
-                })
-            })
-            .catch(function(err){
-                MUtilitiesService.AlertError(err, 'Lỗi');
-            })
-        }
+        //     // also graph comments
+        //     MFacebookService.graphComments($stateParams.conversation_id, $scope.currentAccessToken).then(function(response){
+        //         $scope.$apply(function(){
+        //             // console.log(response);
+        //             $scope.commentData = response;
+        //         })
+        //     })
+        //     .catch(function(err){
+        //         MUtilitiesService.AlertError(err, 'Lỗi');
+        //     })
+        // }
 
         /*
         * Detect shares link
@@ -656,16 +656,16 @@ mRealtime.controller('OdersCtrl',
           });
         }
 
-        // get all products
-        $scope.aProducts = [];
-        var getAllAvailableProducts = function(){
-          var ref = firebase.database().ref();
-          let productsRef = ref.child('products');
-          productsRef.on('child_added', snapshot => {
-            $scope.aProducts.push(snapshot.val());
-          });
-        }
-        getAllAvailableProducts();
+        // // get all products
+        // $scope.aProducts = [];
+        // var getAllAvailableProducts = function(){
+        //   var ref = firebase.database().ref();
+        //   let productsRef = ref.child('products');
+        //   productsRef.on('child_added', snapshot => {
+        //     $scope.aProducts.push(snapshot.val());
+        //   });
+        // }
+        // getAllAvailableProducts();
         $scope.selectedProducts = [];
         
         $scope.addProduct = function(){
