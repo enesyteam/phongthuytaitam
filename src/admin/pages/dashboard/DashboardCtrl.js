@@ -1,6 +1,7 @@
 m_admin.controller('DashboardCtrl',
     function($rootScope, $scope, $http, $filter, $timeout, cfpLoadingBar, firebaseService, Facebook,
-        MFirebaseService, MFacebookService, MUtilitiesService, fanpages, access_token, $stateParams) {
+        MFirebaseService, MFacebookService, MUtilitiesService, fanpages, telesales, access_token, $stateParams) {
+      console.log('telesales', telesales);
         // get access token
         // console.log(fanpages);
         var getAccessToken = function(){
@@ -80,9 +81,12 @@ m_admin.controller('DashboardCtrl',
             
             var res = [];
             angular.forEach($scope.result, function(order){
+                // console.log("order", order);
+                const seller = $filter('filter')(telesales, {id: order.seller_will_call_id})[0];
               res.push( {
                 name: order.customer_name,
                 mobile: order.customer_mobile,
+                seller: seller ? seller.last_name : null,
                 page: $filter('filter')(fanpages, {id: order.page_id})[0].name,
                 status: $scope.getStatusById(order.status_id).name,
                 comment: getComment(order),
