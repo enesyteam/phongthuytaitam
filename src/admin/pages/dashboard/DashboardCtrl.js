@@ -114,8 +114,10 @@ m_admin.controller('DashboardCtrl',
               var theyear = time.getFullYear();
               var themonth = time.getMonth() + 1;
               var thetoday = time.getDate();
+              var created_time = new Date(shipping.created_time);
               res.push( {
                 date: thetoday + '/' + themonth,
+                success: created_time.getTime(),
                 cod: shipping.data.customerData.cod,
                 name: shipping.data.customerData.realName,
                 mobile: shipping.data.customerData.recievedPhone,
