@@ -169,9 +169,11 @@ app.post( '/webhook/orders', (req, res, next) => {
                                                             }
                                                         }
 
-                                                        request.put(
-                                                            'https://phongthuytaitam.firebaseio.com/report/' + reportDate + '.json',
-                                                            { json: initialReport },
+                                                        request.patch(
+                                                            'https://phongthuytaitam.firebaseio.com/report/.json',
+                                                            { json: {
+                                                                [ reportDate ]: initialReport
+                                                            } },
                                                             function (error, response, body) {
                                                                 if (!error && response.statusCode == 200) {
                                                                     console.log('initialize empty today report');
