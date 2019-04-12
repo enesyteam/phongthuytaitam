@@ -189,6 +189,7 @@
                                 HubID: snapshot.val().HubID,
                                 GROUPADDRESS_ID: snapshot.val().GROUPADDRESS_ID,
                                 VIETTEL_STATION_ID: snapshot.val().VIETTEL_STATION_ID,
+                                VIETTEL_HUB: snapshot.val().VIETTEL_HUB,
                             });
                         });
                         resolve(result);

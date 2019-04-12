@@ -35,6 +35,164 @@ app.use(bodyParser.urlencoded({
 }));
 var server = http.createServer(app);
 
+app.post( '/webhook/orders', (req, res, next) => {
+    // console.log(req.body);
+    var rawData = req.body;
+
+    var order = {
+        customer_mobile: rawData ? rawData.phone : null,
+        customer_name: rawData ? rawData.name : null,
+        publish_date: Date.now(),
+        page_id: 1504046709812007,
+        status_id: 1,
+        link: rawData ? rawData.link : null,
+        address: rawData ? rawData.street : null,
+        message: rawData ? rawData.message : null,
+        birthday: rawData ? rawData.date : null,
+    }
+
+    request.post(
+        'https://phongthuytaitam.firebaseio.com/newOrders.json',
+        { json: order },
+        function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log(body);
+                if ( body.name ) {
+                    // update id
+                    request.patch(
+                            'https://phongthuytaitam.firebaseio.com/newOrders/' + body.name + '.json',
+                            { json: { id: body.name } },
+                            function(error, response, body) {
+                                if (!error && response.statusCode == 200) {
+                                    // update report
+                                    // get old value
+                                    var d = new Date();
+                                    // d.setDate(d.getDate() + 1);
+                                    var reportDate = d.getFullYear() + ("0" + (d.getMonth() + 1)).slice(-2) + "" + ("0" + d.getDate()).slice(-2);
+                                    console.log("get report for date: ", d.getDate());
+                                    request.get(
+                                            'https://phongthuytaitam.firebaseio.com/report/' + reportDate  + '.json',
+                                            function (error, response, body) {
+                                                if (!error && response.statusCode == 200) {
+                                                    var reportData = JSON.parse( body );
+                                                    if ( reportData ) {
+                                                        console.log( 'today: ', parseInt(reportData["today"]) );
+                                                        console.log( 'page: ', reportData["pageReport"] );
+
+                                                        var _pageReport = reportData["pageReport"];
+
+                                                        var wwwReport = _pageReport ? _pageReport["1504046709812007"] : null;
+                                                        console.log('wwwReport', wwwReport);
+
+                                                    
+                                                        if ( wwwReport ) {
+                                                            var newCustomers = 0;
+
+                                                            var oldCustomers = parseInt(wwwReport["totalCustomers"]);
+                                                            var oldSuccess = parseInt(wwwReport["totalsuccess"]);
+
+                                                            newCustomers = oldCustomers + 1;
+
+                                                            request.put(
+                                                                'https://phongthuytaitam.firebaseio.com/report/' + reportDate + '/pageReport/1504046709812007/totalCustomers.json',
+                                                                { json: newCustomers },
+                                                                function (error, response, body) {
+                                                                    if (!error && response.statusCode == 200) {
+                                                                        console.log('updated today report');
+                                                                    }
+                                                                }
+                                                            )
+                                                        } else {
+                                                            // create new page report
+                                                            request.put(
+                                                                'https://phongthuytaitam.firebaseio.com/report/' + reportDate + '/pageReport/1504046709812007.json',
+                                                                { json: {
+                                                                    totalCustomers: 1,
+                                                                    totalsuccess: 0,
+                                                                } },
+                                                                function (error, response, body) {
+                                                                    if (!error && response.statusCode == 200) {
+                                                                        console.log('updated today report');
+                                                                    }
+                                                                }
+                                                            )
+                                                        }
+
+                                                        // console.log('newCustomers', newCustomers);
+
+                                                         request.put(
+                                                                'https://phongthuytaitam.firebaseio.com/report/' + reportDate + '/today.json',
+                                                                { json: parseInt(reportData["today"]) + 1 },
+                                                                function (error, response, body) {
+                                                                    if (!error && response.statusCode == 200) {
+                                                                        console.log('updated today report');
+                                                                    }
+                                                                }
+                                                            )
+
+                                                         
+
+                                                        // request.put(
+                                                        //         'https://phongthuytaitam.firebaseio.com/report/' + reportDate  + '.json',
+                                                        //         { json: Object.assign( reportData, { today: parseInt(reportData["today"]) + 1 }, {
+                                                        //                 clickweb: parseInt(reportData["clickweb"]) + 1
+                                                        //         } ) },
+                                                        //         function (error, response, body) {
+                                                        //             if (!error && response.statusCode == 200) {
+                                                        //                 console.log('updated today report');
+                                                        //             }
+                                                        //         }
+                                                        //     )
+
+                                                    } else {
+                                                        // need to create new report,
+                                                        console.log('need to create new report for date');
+
+                                                        var initialReport = {
+                                                            calledCount: 0,
+                                                            date: reportDate,
+                                                            blockedCount: 0, //8
+                                                            callLaterCount: 0, //5
+                                                            cancelCount: 0, // 7
+                                                            penddingCount: 0, //3
+                                                            missedCount: 0, //9
+                                                            notCalledCount: 0, //1 <====== neet to init value here
+                                                            successCount: 0, //6
+                                                            lastSuccessAt: 0,
+                                                            today: 1, // <====== neet to init value here
+
+                                                            pageReport: {
+                                                                "1504046709812007": {
+                                                                    totalCustomers: 1,
+                                                                    totalsuccess: 0, //
+                                                                }
+                                                            }
+                                                        }
+
+                                                        request.put(
+                                                            'https://phongthuytaitam.firebaseio.com/report/' + reportDate + '.json',
+                                                            { json: initialReport },
+                                                            function (error, response, body) {
+                                                                if (!error && response.statusCode == 200) {
+                                                                    console.log('initialize empty today report');
+                                                                }
+                                                            }
+                                                        )
+                                                    }
+                                                    
+                                                }
+                                            }
+                                        )
+
+                                    res.sendStatus(200);
+                                } 
+                            }
+                        )
+                }
+            }
+        }
+    );
+} );
 
 app.get('/',  routes.navigation);
 app.get('/admin',  routes.index);

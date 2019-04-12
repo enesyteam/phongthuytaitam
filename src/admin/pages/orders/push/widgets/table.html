@@ -24,11 +24,11 @@
                         <div class="_4lgd _4h2w">
                            <div class="_4lge _4h2x">
                               <a class="_2pir">
-                                 <img ng-src="assets/images/default-avatar-contact.svg" class="_1drw img" alt="">
+                                 <img ng-src="{{order.link ? 'assets/images/internet.svg' : 'assets/images/default-avatar-contact.svg'}}" class="_1drw img" alt="">
                                  <div class="_1drx">
                                     <div class="_4ik4 _4ik5" style="-webkit-line-clamp: 2;">
                                        <div class="_1dry">
-                                          {{order.customer_name + ' / ' + order.customer_mobile}}
+                                          {{order.link ? "[WEB]" : ""}} {{order.customer_name + ' / ' + order.customer_mobile}}
                                           <span class="" style="color:red" ng-if="order.is_bad_number">
                                              <svg class="octicon gridicon gridicons-notice" height="14" width="14" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1 15h-2v-2h2v2zm0-4h-2l-.5-6h3l-.5 6z"></path></g></svg>
                                              Sai số

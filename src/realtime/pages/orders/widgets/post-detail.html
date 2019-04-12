@@ -7,5 +7,32 @@
          </a>
       </div>
    </div> -->
-   <div class="chatbox-frame" ng-include="'/src/admin/widgets/chat-box.html'"></div>
+   <div style="width: 100%; text-align: center;padding: 30px">
+   	<div>
+   		<h3>
+			Nguồn: {{currentPage ? currentPage.name : null}}
+		</h3>
+   	</div>
+   	<div ng-if="activeOrder.link" class="flash flash-error">
+   		<div>
+   			<h3>
+   				Order này có nguồn từ Click Web. Để xem chi tiết, click vào link dưới đây:
+   			</h3>
+   		</div>
+   		<div>
+   			<a style="font-size: 18px" href="{{activeOrder.link}}" target="_blank">{{activeOrder.link}}</a>
+   		</div>
+   		<div>
+   			{{ activeOrder.address }}
+   		</div>
+   		<div>
+   			{{ activeOrder.message }}
+   		</div>
+   		<div>
+   			{{ activeOrder.birthday }}
+   		</div>
+   	</div>
+   	
+   </div>
+   <!-- <div class="chatbox-frame" ng-include="'/src/admin/widgets/chat-box.html'"></div> -->
 </div>

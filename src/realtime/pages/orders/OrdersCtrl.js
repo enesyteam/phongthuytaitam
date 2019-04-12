@@ -48,6 +48,7 @@ mRealtime.controller('OdersCtrl',
         $rootScope.activeStatusId = activeItem.status_id;
 
         var page = $filter("filter")(fanpages, {id: $stateParams.page_id});
+        $rootScope.currentPage = page ? page[0] : null;
         $scope.conversation_type = $stateParams.type;
         $scope.page_id = $stateParams.page_id;
         // console.log(page);

@@ -34,15 +34,16 @@ mShip.controller('ShipCtrl', ['$q',  '$timeout', '$scope', '$filter', 'activeOrd
     })
 
     angular.forEach(viettel_data.fanpages, (item) => {
-        // console.log(item);
+        console.log(item);
       if(item.id == activeOrder.data.data.orderData.page_id){
         $scope.activeOrder.page = item;
         angular.forEach(viettel_data.hubs, (hub) => {
-          // Todo...
-          if(hub.GROUPADDRESS_ID == item.GROUPADDRESS_ID || hub.GROUPADDRESS_ID == item.VIETTEL_STATION_ID){
-            // console.log(hub);
-            $scope.current_hub = hub;
-          }
+        
+            if ( hub.GROUPADDRESS_ID == item.GROUPADDRESS_ID || 
+                hub.GROUPADDRESS_ID == item.VIETTEL_STATION_ID || 
+                hub.GROUPADDRESS_ID == item.VIETTEL_HUB ) {
+                 $scope.current_hub = hub; 
+            }
         })
       }
     })

@@ -65,6 +65,7 @@ m_admin.controller('PushOrderCtrl',
                         active_log: order.data.activeLog,
                         admin_note: order.data.admin_note,
                         key: order.key,
+                        link: order.data.link,
                     }
                     $scope.$apply(function() {
                         $scope.canAsignOrders.push(item);

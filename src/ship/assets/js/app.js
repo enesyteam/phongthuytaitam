@@ -40,23 +40,27 @@ var mShip = angular.module('mShip', [
                 resolve: {
                   telesales: function(MFirebaseService){
                     return MFirebaseService.getAllMembers().then(function(response){
+                      console.log('done');
                       return response;
                     })
                   },
                   fanpages: function(MFirebaseService){
                       return MFirebaseService.get_fanpages().then(function(response){
+                        console.log('done');
                         return response;
                       });
                     },
                   viettel_stations: function(MFirebaseService) {
                         return MFirebaseService.get_viettel_stations().then(function(response){
                             // console.log(response);
+                            console.log('done');
                             return response;
                         })
                     },
                   viettel_provinces: function($http){
                     return $http.get('../assets/viettel_provinces.json').
                       then(function onSuccess(response) {
+                        console.log('done');
                          return response.data;
                       }).
                       catch(function onError(response) {
@@ -75,6 +79,7 @@ var mShip = angular.module('mShip', [
                     // })
                     return $http.get('../assets/viettel_districs.json').
                       then(function onSuccess(response) {
+                        console.log('done');
                          return response.data;
                       }).
                       catch(function onError(response) {
@@ -87,6 +92,7 @@ var mShip = angular.module('mShip', [
                     // })
                     return $http.get('../assets/viettel_wards.json').
                       then(function onSuccess(response) {
+                        console.log('done');
                          return response.data;
                       }).
                       catch(function onError(response) {
@@ -99,6 +105,7 @@ var mShip = angular.module('mShip', [
                     // })
                     return $http.get('../assets/viettel_services.json').
                       then(function onSuccess(response) {
+                        console.log('done');
                         // console.log(response);
                          return response.data;
                       }).
@@ -112,6 +119,7 @@ var mShip = angular.module('mShip', [
                     // })
                     return $http.get('../assets/viettel_extra_services.json').
                       then(function onSuccess(response) {
+                        console.log('done');
                         // console.log(response);
                          return response.data;
                       }).
@@ -201,6 +209,7 @@ mShip.directive('searchEnter', function () {
             if(event.which === 13) {
                 scope.$apply(function (){
                     scope.$eval(attrs.searchEnter);
+                    // alert("ss");
                     // scope.searchOrder();
                 });
                 event.preventDefault();
