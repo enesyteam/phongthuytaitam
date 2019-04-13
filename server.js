@@ -66,7 +66,7 @@ app.post( '/webhook/orders', (req, res, next) => {
                                 if (!error && response.statusCode == 200) {
                                     // update report
                                     // get old value
-                                    var d = Date.now();
+                                    var d = new Date();
                                     // d.setDate(d.getDate() + 1);
                                     var reportDate = d.getFullYear() + ("0" + (d.getMonth() + 1)).slice(-2) + "" + ("0" + d.getDate()).slice(-2);
                                     console.log("get report for date: ", d.getDate());
