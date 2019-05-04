@@ -3,13 +3,23 @@
       ng-class="order.is_cancel == true ? 'is-cancel' : ''" ng-repeat="order in result track by $index"
       ng-if="!order.is_cancel">
       <div class="col-10 pr-3">
-         <h3>
-            <a class="v-align-middle">{{$index + 1}}. {{order.customer_name}}/<em>{{order.customer_mobile}}</em></a>
+         <h3 class="order-title">
+            <a class="v-align-middle" ng-class="!order.viettel_post_data ? 'pending' : ''">{{result.length - $index}}. {{order.customer_name}}/<em>{{order.customer_mobile}}</em></a>
             {{order.is_cancel == true ? ' (Đã hủy)' : ''}}
+            <span style="color: #fff;background: darkblue;font-size: 13px;padding: 3px 5px;border-radius: 3px;" ng-if="!order.data.orderData.link">WEB</span>
          </h3>
          <p class="d-flex text-gray mb-2 pr-4">
             {{order.data.customerData.addresss}}
+            <br />
          </p>
+         <div ng-if="order.viettel_post_data">
+            <span style="color: #fff;    background: green;padding: 2px 6px;">
+               {{order.viettel_post_station_name}}
+            </span>
+            <span ng-if="order.viettel_post_data" style="margin-left: 10px;color: #fff;    background: green;padding: 2px 6px;">
+               {{order.viettel_post_code}}
+            </span>
+         </div>
          <div class="topics-row-container d-inline-flex flex-wrap flex-items-center f6 my-1 ghn-status">
             <a class="topic-tag topic-tag-link f6 my-1 status-name tooltipped tooltipped-n tooltipped-no-delay" ng-repeat="log in order.logs track by $index" aria-label="{{log.UpdateTime | date: 'HH:mm dd/MM/yyyy'}}">
             {{getStatus(log.CurrentStatus).text}}

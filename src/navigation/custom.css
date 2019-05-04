@@ -238,3 +238,7 @@
 .simple-search-page{
 	padding-top: 50px;
 }
+
+.order-title .pending {
+    color: red;
+}

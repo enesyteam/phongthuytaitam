@@ -123,9 +123,9 @@ mNavigation.controller('ReportCtrl',
 	            })
                 $scope.$apply(function(){
                     $scope.isGettingData = false;
-                    $scope.result = response;
+                    $scope.result = response.reverse();
                 })
-                console.log(response);
+                // console.log(response);
 	    	})
 	    	.catch(function(){
 	    		$scope.isGettingData = false;
