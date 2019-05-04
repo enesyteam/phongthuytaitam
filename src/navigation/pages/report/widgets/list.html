@@ -6,7 +6,7 @@
          <h3 class="order-title">
             <a class="v-align-middle" ng-class="!order.viettel_post_data ? 'pending' : ''">{{result.length - $index}}. {{order.customer_name}}/<em>{{order.customer_mobile}}</em></a>
             {{order.is_cancel == true ? ' (Đã hủy)' : ''}}
-            <span style="color: #fff;background: darkblue;font-size: 13px;padding: 3px 5px;border-radius: 3px;" ng-if="!order.data.orderData.link">WEB</span>
+            <span style="color: #fff;background: darkblue;font-size: 13px;padding: 3px 5px;border-radius: 3px;" ng-if="order.data.orderData.link">WEB</span>
          </h3>
          <p class="d-flex text-gray mb-2 pr-4">
             {{order.data.customerData.addresss}}
