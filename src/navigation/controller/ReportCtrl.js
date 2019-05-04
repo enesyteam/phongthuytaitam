@@ -247,6 +247,7 @@ mNavigation.controller('ReportCtrl',
                         truc_page: order.data.orderData.truc_page,
                         combo: order.data.customerData.combo,
                         xa: order.data.customerData.xa,
+                        link: order.data.orderData.link,
                     });
                 }
             })
