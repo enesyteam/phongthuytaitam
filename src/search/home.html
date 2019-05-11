@@ -4,7 +4,7 @@
     <div class="col-md-6 mt-5">
       <h4>Tìm kiếm</h4>
       <div class="input-group mb-3">  
-        <input type="text" class="form-control form-control-lg" aria-label="Text input with dropdown button" placeholder="Tìm trong hơn 20,000 orders" ng-model="searchQuery.text" search-enter="search()">
+        <input type="text" class="form-control form-control-lg" aria-label="Text input with dropdown button" placeholder="Tìm trong hơn 5,000 orders" ng-model="searchQuery.text" search-enter="search()">
         <span class="input-group-btn">
             <button class="btn btn-link btn-lg" type="button">
               <span class="fa {{is_searching ? 'fa-spinner fa-pulse fa-fw' : 'fa-search'}}"></span>
@@ -16,7 +16,7 @@
   </div>
 <div class="mt-5 mb-5" ng-if="search_result.length>0">
   <hr>
-  <div class="table-responsive">
+  <div class="table-responsive" style="    background: #fff;border-radius: 6px;    box-shadow: rgba(22, 45, 61, 0.06) 0px 6px 6px 0px, rgba(22, 45, 61, 0.12) 0px 0px 18px 0px;">
       <table id="bs-table" class="table table-hover">
         <thead>
           <tr>
@@ -68,6 +68,7 @@
                     </span>
                     <span>{{order.admin_note}}</span>
                  </span>
+                
               </div>
               <div  style="font-size:12px;" ng-if="order.shipData">
                 <!-- {{order.shipData}} -->
@@ -94,13 +95,16 @@
                   </li> -->
                 </ul>
               </div>
+              <div ng-if="order.shipData.data.customerData.customerNote" class="flash flash-error" style="padding: 5px 15px;border-left: 4px solid red;color: red;background: #f8f8f8;">
+                   {{order.shipData.data.customerData.customerNote}}
+              </div>
+              <div ng-if="order.shipData.data.customerData.orderNote" class="flash flash-error" style="padding: 5px 15px;border-left: 4px solid red;color: red;background: #f8f8f8;">
+                   {{order.shipData.data.customerData.orderNote}}
+              </div>
               <div class="info-actions">
                 <ul>
                   <li ng-if="order.shipData.viettel_post_code">
                     <a href="" ng-click="showShipData(order)">Xem đơn hàng</a>
-                  </li>
-                  <li>
-                    <a href="" ng-click="showChatBox(order)">Xem hội thoại</a>
                   </li>
                   <li>
                     <a href="" ng-click="showNoteBox(order)">Thêm ghi chú</a>
